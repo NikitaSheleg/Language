@@ -1,0 +1,32 @@
+class a{
+    double PI=3.14159265358979323846;
+    strictfp double toRadians(double angdeg) {
+        return angdeg / 180.0 * PI;
+    }
+     strictfp int rounding(double angdeg) {
+            return (int)angdeg;
+     }
+      strictfp void swapInt(int left, int right) {
+                 if(left != right){
+                 int temp = left;
+                 left = right;
+                 right = temp;
+                 }
+      }
+
+      strictfp void sort(int[] arr){
+        boolean swapped;
+
+        do{
+            swapped = false;
+            for(int i = 1; i < arr.length; i++){
+                if(item[i-1].CompareTo(item[i]) > 0){
+                    swapInt(item[i-1], item[1]);
+                    swapped = true;
+                }
+            }
+        }while(swapped != false);
+      }
+
+
+}
