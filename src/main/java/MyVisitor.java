@@ -3,7 +3,7 @@ import antlr.AntlrTestParser;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
+import java.util.Objects;
 
 public class MyVisitor extends AntlrTestBaseVisitor<Double> {
 
@@ -31,8 +31,8 @@ public class MyVisitor extends AntlrTestBaseVisitor<Double> {
 
     @Override
     public Double visitPlusMinus(AntlrTestParser.PlusMinusContext ctx) {
-        Double left = visit(ctx.expression(0));//Integer.parseInt(ctx.expression(0).getText());//
-        Double right = visit(ctx.expression(1));//Integer.parseInt(ctx.expression(1).getText());  //
+        Double left = visit(ctx.expression(0));
+        Double right = visit(ctx.expression(1));
         if (ctx.operation.getType() == AntlrTestParser.PLUS)
             return left + right;
 
@@ -78,7 +78,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Double> {
     public Double visitCompare(AntlrTestParser.CompareContext ctx) {
         if (ctx.operation.getText().equals(">") && visit(ctx.expression(0)) > visit(ctx.expression(1)) ||
                 ctx.operation.getText().equals("<") && visit(ctx.expression(0)) < visit(ctx.expression(1)) ||
-                ctx.operation.getText().equals("==") && visit(ctx.expression(0)) == visit(ctx.expression(1))) {
+                ctx.operation.getText().equals("==") && Objects.equals(visit(ctx.expression(0)), visit(ctx.expression(1)))) {
             return 0.0;
         } else if (visit(ctx.expression(0)) > visit(ctx.expression(1)))
             return 1.0;
@@ -103,8 +103,12 @@ public class MyVisitor extends AntlrTestBaseVisitor<Double> {
 
             }
             case "while": {
-                while (visit(ctx.expression(0)) == 0) {
-                    visit(ctx.statement(0));
+                if (visit(ctx.expression(0)) == 0) {
+                    double result = 0.0;
+                    while (visit(ctx.expression(0)) == 0) {
+                        result = visit(ctx.statement(0));
+                    }
+                    return result;
                 }
                 break;
             }
@@ -149,12 +153,19 @@ public class MyVisitor extends AntlrTestBaseVisitor<Double> {
         switch (ctx.UNARY_OPERATOR().getText()) {
             case "++": {
                 res++;
+
                 break;
             }
             case "--": {
                 res--;
                 break;
             }
+        }
+        for (Map<String, String> map : memory.keySet()) {
+            if (map.containsValue(ctx.expression().getText())) {
+                memory.replace(map, res);
+            }
+
         }
         return res;
     }
