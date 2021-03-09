@@ -38,15 +38,14 @@ expression:
 
 WHITESPACE: [ \t\r\n]+ -> skip;
 
-statement: 'if' '(' expression')' '{'statement '}' ('else' ('if' '(' expression')')? '{'statement '}')*                             |
-           'while' '(' expression ')' '{'statement '}'                          |
-           'do' '{' statement '}'                                               |
-           'return' expression ';'                                              |
-           'for' '(' parameter';'expression';'expression')' '{'statement'}'     |
-           'switch' expression ':' ('case' expression ':' '{' statement '}')+   |
-           'break' ';'                                                          |
-           'continue' ';'                                                       |
-            (expression ';')+
-            ;
-function: TYPE 'auf' NAME '(' expression ')' '{' statement '}';
+return:  'return' expression ';' ;
+if: 'if' '(' expression')' '{'statement '}' ('else' ('if' '(' expression')')? '{'statement '}')*;
+while:'while' '(' expression ')' '{'statement '}';
+for:'for' '(' parameter';'expression';'expression')' '{'statement'}' ;
+break:'break;';
+continue:'continue;';
+
+
+statement:(return|if|while|for|break|continue|expression+);
+function:  'auf' TYPE NAME '(' expression ')' '{' statement '}';
 cool:statement*;
