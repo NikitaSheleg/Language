@@ -16,8 +16,8 @@
         <PerGrammarGenerationSettings>
           <option name="fileName" value="$PROJECT_DIR$/src/main/java/antlr/AntlrTest.g4" />
           <option name="autoGen" value="true" />
-          <option name="outputDir" value="C:\Users\User\Downloads\comicStore-master\FirstAntlr\src\main\java" />
-          <option name="libDir" value="C:\Users\User\Downloads\comicStore-master\FirstAntlr\src\main\java" />
+          <option name="outputDir" value="C:\Users\User\Desktop\япис\FirstAntlr\src\main\java" />
+          <option name="libDir" value="C:\Users\User\Desktop\япис\FirstAntlr\src\main\java" />
           <option name="encoding" value="" />
           <option name="pkg" value="" />
           <option name="language" value="Java" />

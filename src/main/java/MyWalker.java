@@ -1,6 +1,5 @@
 import antlr.AntlrTestBaseListener;
 import antlr.AntlrTestParser;
-import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.TokenStream;
 
 public class MyWalker extends AntlrTestBaseListener {
@@ -17,8 +16,6 @@ public class MyWalker extends AntlrTestBaseListener {
         if (ctx.TYPE() != null) {
             type =ctx.TYPE().getText();
         }
-        String args = tokens.getText(ctx.expression());
-        System.out.println("\t" + type + " " + ctx.NAME() +"("+ args+")" + ";");
 
     }
 }

@@ -15,11 +15,11 @@ COMPARE:'!='|'=='|'<'|'>'|'>='|'<=';
 UNARY_OPERATOR: '--'|'++';
 NAME : [a-z]+|[A-Z]+;
 TYPE: 'Integer'|'Double';
-
-parameter: expression (NAME|NUM);
+UNARY_OPERATOR_SIDE: 'left'|'right';
+parameter: (TYPE NAME|NUM|NAME)?;
 
 expression:
-  TYPE expression #type
+  TYPE ((NAME '=' expression|)identifier) #defineVariable
 | '('expression')' #parens
 | expression operation =(MULTIPLICATION|DIV) expression #mulDiv
 | expression operation =(PLUS|MINUS) expression #plusMinus
@@ -28,24 +28,24 @@ expression:
 | <assoc=right> expression '^' expression #idk
 | '!' expression #not
 | NAME #name
-| UNARY_OPERATOR expression #unaryLeft
-| expression UNARY_OPERATOR #unaryRight
-
+| (UNARY_OPERATOR_SIDE UNARY_OPERATOR expression ) #unaryOperator
 | NUM #num
-| NAME '=' NUM #id
-
+|identifier #id
 ;
+
+identifier:NAME '=' NUM;
 
 WHITESPACE: [ \t\r\n]+ -> skip;
 
-return:  'return' expression ';' ;
-if: 'if' '(' expression')' '{'statement '}' ('else' ('if' '(' expression')')? '{'statement '}')*;
-while:'while' '(' expression ')' '{'statement '}';
-for:'for' '(' parameter';'expression';'expression')' '{'statement'}' ;
-break:'break;';
-continue:'continue;';
+return_Rule:  'return' expression ';' ;
+if_Rule: 'if' '(' expression')' '{'statement '}' ('else' ('if' '(' expression')')? '{'statement '}')*;
+while_Rule:'while' '(' expression ')' '{'statement '}';
+for_Rule:'for' '(' parameter';'expression';'expression')' '{'statement'}' ;
+break_Rule:'break;';
+continue_Rule:'continue;';
+statement_rules:(return_Rule|if_Rule|while_Rule|for_Rule|break_Rule|continue_Rule);
 
-
-statement:(return|if|while|for|break|continue|expression+);
-function:  'auf' TYPE NAME '(' expression ')' '{' statement '}';
-cool:statement*;
+statement:statement_rules+;
+function:  'auf' TYPE NAME '(' parameter ')' '{' statement '}';
+mainFunction: 'main' function;
+cool:(statement|function|mainFunction|expression+)+;

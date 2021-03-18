@@ -14,45 +14,25 @@ import java.util.Set;
 
 public class While extends Statement {
     private final Condition condition;
-    private final List<Statement> statements;
-    private Path myPath;
+    private final List<Base> statements;
 
-    public While(Condition condition, List<Statement> statements, Path myPath) {
+    public While(Condition condition, List<Base> statements) {
         this.condition = condition;
-        this.myPath=myPath;
         this.statements = statements;
     }
 
+
     @Override
-    void toJava() {
-
-
-        if (Files.exists(myPath)) {
-
-            System.out.println("File already exists");
-        } else {
-
-            try {
-                Files.createFile(myPath);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        List<String> lines = new ArrayList<>();
-        lines.add("class Test {");
-        lines.add("public static void main(String []args){");
-        lines.add("while(" + condition.toString() + ")");
-        lines.add("{");
-        for (Statement statement : statements) {
-            lines.add(statement.toString());
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for (Base stat : statements) {
+            builder.append(stat.toString()).append(" ");
         }
 
-        try {
-            Files.write(myPath, lines, StandardCharsets.UTF_8,
-                    StandardOpenOption.APPEND);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        return "While(" +
+                condition.toString() + ")"
+                + "{" +
+                builder +
+                '}';
     }
 }

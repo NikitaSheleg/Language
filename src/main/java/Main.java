@@ -6,16 +6,8 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
@@ -25,8 +17,8 @@ public class Main {
                 "Integer a=3;" +
                         "Integer b= 12;" +
                         "Integer c = 9;" +
-                        "while(a<b){" +
-                        "if(a<b){a++;}" +
+                       "if(a<b){" +
+                        "a++;" +
                         "}");
 
 //"if(1>2){1-2}else if(1<2){if(1==1){3-2} else{1-3}} else{1-4}"
@@ -42,43 +34,13 @@ public class Main {
         AntlrTestParser parser = new AntlrTestParser(tokens);
         ParseTree tree = parser.cool(); // parse
         MyVisitor visitor = new MyVisitor();
-        Double result = visitor.visit(tree);
+        Base result = visitor.visit(tree);
+        Converter converter = new Converter();
+        converter.toJava(MyVisitor.code, Paths.get("src/main/java/Test.java"));
         System.out.println(result);
 
 
-        Path myPath = Paths.get("src/main/java/Test.java");
-        if (Files.exists(myPath)) {
 
-            System.out.println("File already exists");
-        } else {
-
-            try {
-                Files.createFile(myPath);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        List<String> lines = new ArrayList<>();
-        lines.add("System.out.println(a);");
-        lines.add("}}");
-        try {
-            Files.write(myPath, lines, StandardCharsets.UTF_8,
-                    StandardOpenOption.APPEND);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Main obj = new Main();
-        String className = "Test.java";
-        String command = "javac " + className;
-        String output = obj.executeCommand(command);
-        try {
-            Runtime.getRuntime().exec(command);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Compiler.command(command);
-        System.out.println(output);
     }
 
     private String executeCommand(String command) {
