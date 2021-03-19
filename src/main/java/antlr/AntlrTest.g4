@@ -49,5 +49,5 @@ statement_rules:(return_Rule|if_Rule|while_Rule|for_Rule|break_Rule|continue_Rul
 
 statement:statement_rules+;
 function:  'auf' TYPE NAME '(' parameter ')' '{' statement '}';
-mainFunction: MAIN_FUNCTION_ID'{' statement* expression* '}';
+mainFunction: MAIN_FUNCTION_ID'{' statement* '}';
 cool:(statement+|function|expression+)+|mainFunction ;

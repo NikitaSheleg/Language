@@ -32,7 +32,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
                     left.toString(),
                     right.toString());
         }
-       // code.add(math.toString());
+        // code.add(math.toString());
         return math;
     }
 
@@ -53,7 +53,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
                     left.toString(),
                     right.toString());
         }
-       // code.add(math.toString());
+        // code.add(math.toString());
         return math;
     }
 
@@ -92,7 +92,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
         DefineVariable defineVariable = new DefineVariable(ctx.TYPE().getText(),
                 visitIdentifier((AntlrTestParser.IdentifierContext) ctx.getChild(1))
         );
-      //  code.add(defineVariable.toString());
+        //  code.add(defineVariable.toString());
         if (ctx.expression() != null)
             visit(ctx.expression());
         return defineVariable;
@@ -119,7 +119,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
                         ctx.expression(0).getChild(2).getText(),
                         ctx.expression(0).getChild(1).getText()), statements
         );
-       // code.add(ifStatement.toString());
+        // code.add(ifStatement.toString());
         return ifStatement;
     }
 
@@ -136,7 +136,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
                         ctx.expression().getChild(1).getText()), statements
 
         );
-       // code.add(state.toString());
+        // code.add(state.toString());
         return state;
     }
 
@@ -179,12 +179,16 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
     public MainFunctionNode visitMainFunction(AntlrTestParser.MainFunctionContext ctx) {
         List<Base> statements = new ArrayList<>();
         for (int i = 0; i < ctx.statement().size(); i++) {
-            statements.add(visit(ctx.statement(i)));
 
+            for (int j = 0; j < ctx.statement(i).statement_rules().size(); j++) {
+                for (int k = 0; k <ctx.statement(i).statement_rules(j).expression().size(); k++) {
+                    statements.add(visit(ctx.statement(i).statement_rules(j).expression(k)));
+                }
+
+            }
+            statements.add(visit(ctx.statement(i)));
         }
-        for (int i = 0; i < ctx.expression().size(); i++) {
-            statements.add(visit(ctx.expression(i)));
-        }
+
 
         MainFunctionNode mainFunctionNode = new MainFunctionNode(statements);
         code.add(mainFunctionNode.toString());
