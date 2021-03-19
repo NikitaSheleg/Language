@@ -107,41 +107,47 @@ public interface AntlrTestVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIdentifier(AntlrTestParser.IdentifierContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link AntlrTestParser#return}.
+	 * Visit a parse tree produced by {@link AntlrTestParser#return_Rule}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitReturn(AntlrTestParser.ReturnContext ctx);
+	T visitReturn_Rule(AntlrTestParser.Return_RuleContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link AntlrTestParser#if}.
+	 * Visit a parse tree produced by {@link AntlrTestParser#if_Rule}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIf(AntlrTestParser.IfContext ctx);
+	T visitIf_Rule(AntlrTestParser.If_RuleContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link AntlrTestParser#while}.
+	 * Visit a parse tree produced by {@link AntlrTestParser#while_Rule}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitWhile(AntlrTestParser.WhileContext ctx);
+	T visitWhile_Rule(AntlrTestParser.While_RuleContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link AntlrTestParser#for}.
+	 * Visit a parse tree produced by {@link AntlrTestParser#for_Rule}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFor(AntlrTestParser.ForContext ctx);
+	T visitFor_Rule(AntlrTestParser.For_RuleContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link AntlrTestParser#break}.
+	 * Visit a parse tree produced by {@link AntlrTestParser#break_Rule}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBreak(AntlrTestParser.BreakContext ctx);
+	T visitBreak_Rule(AntlrTestParser.Break_RuleContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link AntlrTestParser#continue}.
+	 * Visit a parse tree produced by {@link AntlrTestParser#continue_Rule}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitContinue(AntlrTestParser.ContinueContext ctx);
+	T visitContinue_Rule(AntlrTestParser.Continue_RuleContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AntlrTestParser#statement_rules}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatement_rules(AntlrTestParser.Statement_rulesContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link AntlrTestParser#statement}.
 	 * @param ctx the parse tree

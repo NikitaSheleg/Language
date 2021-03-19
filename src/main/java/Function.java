@@ -2,6 +2,9 @@ public class Function extends Base {
     private Parameter parameter;
     private String name, type;
 
+    public Function() {
+    }
+
     public Function(Parameter parameter, String name, String type) {
         this.parameter = parameter;
         this.name = name;

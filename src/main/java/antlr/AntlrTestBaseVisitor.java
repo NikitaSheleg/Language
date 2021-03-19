@@ -115,42 +115,49 @@ public class AntlrTestBaseVisitor<T> extends AbstractParseTreeVisitor<T> impleme
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitReturn(AntlrTestParser.ReturnContext ctx) { return visitChildren(ctx); }
+	@Override public T visitReturn_Rule(AntlrTestParser.Return_RuleContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitIf(AntlrTestParser.IfContext ctx) { return visitChildren(ctx); }
+	@Override public T visitIf_Rule(AntlrTestParser.If_RuleContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitWhile(AntlrTestParser.WhileContext ctx) { return visitChildren(ctx); }
+	@Override public T visitWhile_Rule(AntlrTestParser.While_RuleContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFor(AntlrTestParser.ForContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFor_Rule(AntlrTestParser.For_RuleContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBreak(AntlrTestParser.BreakContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBreak_Rule(AntlrTestParser.Break_RuleContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitContinue(AntlrTestParser.ContinueContext ctx) { return visitChildren(ctx); }
+	@Override public T visitContinue_Rule(AntlrTestParser.Continue_RuleContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitStatement_rules(AntlrTestParser.Statement_rulesContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -172,65 +172,75 @@ public interface AntlrTestListener extends ParseTreeListener {
 	 */
 	void exitIdentifier(AntlrTestParser.IdentifierContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link AntlrTestParser#return}.
+	 * Enter a parse tree produced by {@link AntlrTestParser#return_Rule}.
 	 * @param ctx the parse tree
 	 */
-	void enterReturn(AntlrTestParser.ReturnContext ctx);
+	void enterReturn_Rule(AntlrTestParser.Return_RuleContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link AntlrTestParser#return}.
+	 * Exit a parse tree produced by {@link AntlrTestParser#return_Rule}.
 	 * @param ctx the parse tree
 	 */
-	void exitReturn(AntlrTestParser.ReturnContext ctx);
+	void exitReturn_Rule(AntlrTestParser.Return_RuleContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link AntlrTestParser#if}.
+	 * Enter a parse tree produced by {@link AntlrTestParser#if_Rule}.
 	 * @param ctx the parse tree
 	 */
-	void enterIf(AntlrTestParser.IfContext ctx);
+	void enterIf_Rule(AntlrTestParser.If_RuleContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link AntlrTestParser#if}.
+	 * Exit a parse tree produced by {@link AntlrTestParser#if_Rule}.
 	 * @param ctx the parse tree
 	 */
-	void exitIf(AntlrTestParser.IfContext ctx);
+	void exitIf_Rule(AntlrTestParser.If_RuleContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link AntlrTestParser#while}.
+	 * Enter a parse tree produced by {@link AntlrTestParser#while_Rule}.
 	 * @param ctx the parse tree
 	 */
-	void enterWhile(AntlrTestParser.WhileContext ctx);
+	void enterWhile_Rule(AntlrTestParser.While_RuleContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link AntlrTestParser#while}.
+	 * Exit a parse tree produced by {@link AntlrTestParser#while_Rule}.
 	 * @param ctx the parse tree
 	 */
-	void exitWhile(AntlrTestParser.WhileContext ctx);
+	void exitWhile_Rule(AntlrTestParser.While_RuleContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link AntlrTestParser#for}.
+	 * Enter a parse tree produced by {@link AntlrTestParser#for_Rule}.
 	 * @param ctx the parse tree
 	 */
-	void enterFor(AntlrTestParser.ForContext ctx);
+	void enterFor_Rule(AntlrTestParser.For_RuleContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link AntlrTestParser#for}.
+	 * Exit a parse tree produced by {@link AntlrTestParser#for_Rule}.
 	 * @param ctx the parse tree
 	 */
-	void exitFor(AntlrTestParser.ForContext ctx);
+	void exitFor_Rule(AntlrTestParser.For_RuleContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link AntlrTestParser#break}.
+	 * Enter a parse tree produced by {@link AntlrTestParser#break_Rule}.
 	 * @param ctx the parse tree
 	 */
-	void enterBreak(AntlrTestParser.BreakContext ctx);
+	void enterBreak_Rule(AntlrTestParser.Break_RuleContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link AntlrTestParser#break}.
+	 * Exit a parse tree produced by {@link AntlrTestParser#break_Rule}.
 	 * @param ctx the parse tree
 	 */
-	void exitBreak(AntlrTestParser.BreakContext ctx);
+	void exitBreak_Rule(AntlrTestParser.Break_RuleContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link AntlrTestParser#continue}.
+	 * Enter a parse tree produced by {@link AntlrTestParser#continue_Rule}.
 	 * @param ctx the parse tree
 	 */
-	void enterContinue(AntlrTestParser.ContinueContext ctx);
+	void enterContinue_Rule(AntlrTestParser.Continue_RuleContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link AntlrTestParser#continue}.
+	 * Exit a parse tree produced by {@link AntlrTestParser#continue_Rule}.
 	 * @param ctx the parse tree
 	 */
-	void exitContinue(AntlrTestParser.ContinueContext ctx);
+	void exitContinue_Rule(AntlrTestParser.Continue_RuleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AntlrTestParser#statement_rules}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatement_rules(AntlrTestParser.Statement_rulesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AntlrTestParser#statement_rules}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatement_rules(AntlrTestParser.Statement_rulesContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link AntlrTestParser#statement}.
 	 * @param ctx the parse tree

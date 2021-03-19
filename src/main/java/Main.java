@@ -14,11 +14,17 @@ public class Main {
 
 
         CharStream inputStream = CharStreams.fromString(
-                "Integer a=3;" +
-                        "Integer b= 12;" +
-                        "Integer c = 9;" +
+                "main" +
+                        "auf" +
+                        "{" +
+                        "Integer a=3" +
+                        "Integer b= 12" +
+                        "Integer c = 9" +
                        "if(a<b){" +
-                        "a++;" +
+                        " right ++ a;" +
+                        "left -- b;" +
+                        "right ++ b;" +
+                        "}" +
                         "}");
 
 //"if(1>2){1-2}else if(1<2){if(1==1){3-2} else{1-3}} else{1-4}"

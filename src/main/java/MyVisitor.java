@@ -109,57 +109,42 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
     }
 
     @Override
-    public Base visitCool(AntlrTestParser.CoolContext ctx) {
-        switch (ctx.getChild(0).getText()) {
-            case "if": {
-                List<Base> statements = new ArrayList<>();
-                for (int i = 0; i < ctx.statement().size(); i++) {
-                    statements.add(visit(ctx.statement(i)));
-
-                }
-                IfStatement ifStatement = new IfStatement(
-                        new Condition(ctx.expression(0).getChild(0).getText(),
-                                ctx.expression(0).getChild(2).getText(),
-                                ctx.expression(0).getChild(1).getText()), statements
-                );
-                code.add(ifStatement.toString());
-                return ifStatement;
-            }
-            case "while": {
-                List<Base> statements = new ArrayList<>();
-                for (int i = 0; i < ctx.statement().size(); i++) {
-                    statements.add(visit(ctx.statement(i)));
-
-                }
-                While state = new While(
-                        new Condition(ctx.expression(0).getChild(0).getText(),
-                                ctx.expression(0).getChild(2).getText(),
-                                ctx.expression(0).getChild(1).getText()), statements
-
-                );
-                code.add(state.toString());
-                return state;
-
-            }
-            case "for": {
-
-            }
-            case "do": {
-                visit(ctx.statement(0));
-            }
-            case "return": {
-
-
-            }
-            case "switch": {
-
-            }
-            default: {
-
-            }
-
+    public Base visitIf_Rule(AntlrTestParser.If_RuleContext ctx) {
+        List<Base> statements = new ArrayList<>();
+        for (int i = 0; i < ctx.statement().size(); i++) {
+            statements.add(visit(ctx.statement(i)));
 
         }
+        IfStatement ifStatement = new IfStatement(
+                new Condition(ctx.expression(0).getChild(0).getText(),
+                        ctx.expression(0).getChild(2).getText(),
+                        ctx.expression(0).getChild(1).getText()), statements
+        );
+        code.add(ifStatement.toString());
+        return ifStatement;
+    }
+
+    @Override
+    public Base visitWhile_Rule(AntlrTestParser.While_RuleContext ctx) {
+        List<Base> statements = new ArrayList<>();
+        for (int i = 0; i < ctx.statement().size(); i++) {
+            statements.add(visit(ctx.statement(i)));
+
+        }
+        While state = new While(
+                new Condition(ctx.expression().getChild(0).getText(),
+                        ctx.expression().getChild(2).getText(),
+                        ctx.expression().getChild(1).getText()), statements
+
+        );
+        code.add(state.toString());
+        return state;
+    }
+
+
+    @Override
+    public Base visitCool(AntlrTestParser.CoolContext ctx) {
+
         Base defaultRespond = null;
         for (int j = 0; j < ctx.expression().size(); j++) {
             defaultRespond = visit(ctx.expression(j));
@@ -172,6 +157,17 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
         return defaultRespond;
     }
 
+    @Override
+    public Base visitStatement(AntlrTestParser.StatementContext ctx) {
+        Base defaultRespond = null;
+        for (int i = 0; i < ctx.statement_rules().size(); i++) {
+            defaultRespond = visit(ctx.statement_rules(i));
+
+        }
+
+
+        return defaultRespond;
+    }
 
     @Override
     public Base visitName(AntlrTestParser.NameContext ctx) {
@@ -183,5 +179,17 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
         return new UnaryOperator(ctx.expression().getText(),
                 ctx.UNARY_OPERATOR().getText(),
                 ctx.UNARY_OPERATOR_SIDE().getText());
+    }
+
+    @Override
+    public MainFunctionNode visitMainFunction(AntlrTestParser.MainFunctionContext ctx) {
+        List<Base> statements = new ArrayList<>();
+        for (int i = 0; i < ctx.statement().size(); i++) {
+            statements.add(visit(ctx.statement(i)));
+
+        }
+        MainFunctionNode mainFunctionNode = new MainFunctionNode(statements);
+        code.add(mainFunctionNode.toString());
+        return mainFunctionNode;
     }
 }

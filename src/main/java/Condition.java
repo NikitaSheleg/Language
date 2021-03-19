@@ -12,19 +12,7 @@ public class Condition extends Expression {
         this.right = right;
     }
 
-    public boolean compareInt() {
-        return operator.equals(">") && Integer.parseInt(left) > Integer.parseInt(right) ||
-                operator.equals("<") && Integer.parseInt(left) < Integer.parseInt(right) ||
-                operator.equals("==") && Objects.equals(left, right);
 
-    }
-
-    public boolean compareDouble(AntlrTestParser.CompareContext ctx) {
-        return ctx.operation.getText().equals(">") && Integer.parseInt(left) > Integer.parseInt(right) ||
-                ctx.operation.getText().equals("<") && Integer.parseInt(left) < Integer.parseInt(right) ||
-                ctx.operation.getText().equals("==") && Objects.equals(left, right);
-
-    }
 
     @Override
     public String toString() {

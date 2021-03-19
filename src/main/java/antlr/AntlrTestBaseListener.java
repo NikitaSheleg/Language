@@ -184,73 +184,85 @@ public class AntlrTestBaseListener implements AntlrTestListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterReturn(AntlrTestParser.ReturnContext ctx) { }
+	@Override public void enterReturn_Rule(AntlrTestParser.Return_RuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitReturn(AntlrTestParser.ReturnContext ctx) { }
+	@Override public void exitReturn_Rule(AntlrTestParser.Return_RuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIf(AntlrTestParser.IfContext ctx) { }
+	@Override public void enterIf_Rule(AntlrTestParser.If_RuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIf(AntlrTestParser.IfContext ctx) { }
+	@Override public void exitIf_Rule(AntlrTestParser.If_RuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterWhile(AntlrTestParser.WhileContext ctx) { }
+	@Override public void enterWhile_Rule(AntlrTestParser.While_RuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitWhile(AntlrTestParser.WhileContext ctx) { }
+	@Override public void exitWhile_Rule(AntlrTestParser.While_RuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFor(AntlrTestParser.ForContext ctx) { }
+	@Override public void enterFor_Rule(AntlrTestParser.For_RuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFor(AntlrTestParser.ForContext ctx) { }
+	@Override public void exitFor_Rule(AntlrTestParser.For_RuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBreak(AntlrTestParser.BreakContext ctx) { }
+	@Override public void enterBreak_Rule(AntlrTestParser.Break_RuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBreak(AntlrTestParser.BreakContext ctx) { }
+	@Override public void exitBreak_Rule(AntlrTestParser.Break_RuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterContinue(AntlrTestParser.ContinueContext ctx) { }
+	@Override public void enterContinue_Rule(AntlrTestParser.Continue_RuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitContinue(AntlrTestParser.ContinueContext ctx) { }
+	@Override public void exitContinue_Rule(AntlrTestParser.Continue_RuleContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStatement_rules(AntlrTestParser.Statement_rulesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStatement_rules(AntlrTestParser.Statement_rulesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
