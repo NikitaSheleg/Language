@@ -14,6 +14,7 @@ MINUS: '-';
 LOGIC: '&&'|'||';
 COMPARE:'!='|'=='|'<'|'>'|'>='|'<=';
 UNARY_OPERATOR: '--'|'++';
+MAIN_FUNCTION_ID:'mainauf';
 NAME : [a-z]+|[A-Z]+;
 TYPE: 'Integer'|'Double';
 
@@ -48,5 +49,5 @@ statement_rules:(return_Rule|if_Rule|while_Rule|for_Rule|break_Rule|continue_Rul
 
 statement:statement_rules+;
 function:  'auf' TYPE NAME '(' parameter ')' '{' statement '}';
-mainFunction: 'main' 'auf' '{' statement* '}';
-cool:(statement+|function|mainFunction|expression+)+ ;
+mainFunction: MAIN_FUNCTION_ID'{' statement* expression* '}';
+cool:(statement+|function|expression+)+|mainFunction ;

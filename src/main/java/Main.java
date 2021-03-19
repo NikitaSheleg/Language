@@ -14,8 +14,7 @@ public class Main {
 
 
         CharStream inputStream = CharStreams.fromString(
-                "main" +
-                        "auf" +
+                "mainauf" +
                         "{" +
                         "Integer a=3" +
                         "Integer b= 12" +

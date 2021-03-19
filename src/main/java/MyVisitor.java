@@ -32,7 +32,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
                     left.toString(),
                     right.toString());
         }
-        code.add(math.toString());
+       // code.add(math.toString());
         return math;
     }
 
@@ -53,7 +53,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
                     left.toString(),
                     right.toString());
         }
-        code.add(math.toString());
+       // code.add(math.toString());
         return math;
     }
 
@@ -92,8 +92,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
         DefineVariable defineVariable = new DefineVariable(ctx.TYPE().getText(),
                 visitIdentifier((AntlrTestParser.IdentifierContext) ctx.getChild(1))
         );
-        code.add(defineVariable.toString());
-        // lines.add(ctx.TYPE().getText()+" "+ctx.expression().getText()+";");
+      //  code.add(defineVariable.toString());
         if (ctx.expression() != null)
             visit(ctx.expression());
         return defineVariable;
@@ -120,7 +119,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
                         ctx.expression(0).getChild(2).getText(),
                         ctx.expression(0).getChild(1).getText()), statements
         );
-        code.add(ifStatement.toString());
+       // code.add(ifStatement.toString());
         return ifStatement;
     }
 
@@ -137,7 +136,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
                         ctx.expression().getChild(1).getText()), statements
 
         );
-        code.add(state.toString());
+       // code.add(state.toString());
         return state;
     }
 
@@ -146,13 +145,10 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
     public Base visitCool(AntlrTestParser.CoolContext ctx) {
 
         Base defaultRespond = null;
-        for (int j = 0; j < ctx.expression().size(); j++) {
-            defaultRespond = visit(ctx.expression(j));
+        if (ctx.mainFunction() != null) {
+            defaultRespond = visit(ctx.mainFunction());
         }
-        for (int j = 0; j < ctx.statement().size(); j++) {
-            if (ctx.statement(j).statement_rules().size() != 0)
-                defaultRespond = visit(ctx.statement(j));
-        }
+
 
         return defaultRespond;
     }
@@ -162,9 +158,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
         Base defaultRespond = null;
         for (int i = 0; i < ctx.statement_rules().size(); i++) {
             defaultRespond = visit(ctx.statement_rules(i));
-
         }
-
 
         return defaultRespond;
     }
@@ -188,6 +182,10 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
             statements.add(visit(ctx.statement(i)));
 
         }
+        for (int i = 0; i < ctx.expression().size(); i++) {
+            statements.add(visit(ctx.expression(i)));
+        }
+
         MainFunctionNode mainFunctionNode = new MainFunctionNode(statements);
         code.add(mainFunctionNode.toString());
         return mainFunctionNode;

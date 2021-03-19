@@ -13,9 +13,10 @@ public class MainFunctionNode extends Function {
         for (Base stat : statements) {
             builder.append(stat.toString()).append(" ");
         }
-        return "public static void main(String[] args)" +
+        return "class Test{" +
+                "public static void main(String[] args)" +
                 "{" +
                 builder +
-                "}";
+                "}}";
     }
 }
