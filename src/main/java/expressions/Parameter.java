@@ -1,6 +1,6 @@
 package expressions;
 
-public class Parameter {
+public class Parameter extends Expression {
     private String type, name;
     private Number number;
 

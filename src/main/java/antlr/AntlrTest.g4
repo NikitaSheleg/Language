@@ -38,7 +38,7 @@ expression:
 identifier:NAME '=' NUM;
 
 WHITESPACE: [ \t\r\n]+ -> skip;
-function:  'auf' TYPE NAME '(' parameter ')' '{' statement '}';
+function:  'auf' TYPE NAME '(' parameter (',' parameter)* ')' '{' statement* '}';
 mainFunction: MAIN_FUNCTION_ID'{' statement* '}';
 
 return_Rule:  'return' expression ';' ;

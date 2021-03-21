@@ -1,0 +1,14 @@
+ mainauf {
+    Integer a=3
+    Integer b= 12
+    Integer c = 9
+    while(a<b){
+        left -- a;
+        break;
+    }
+    if(a<b){
+        right ++ a;
+        left -- b;
+        right ++ b;
+    }
+}

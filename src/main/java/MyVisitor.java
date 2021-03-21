@@ -4,10 +4,7 @@ import base.Base;
 import expressions.*;
 import expressions.Math;
 import expressions.Number;
-import statements.BrakeStatement;
-import statements.IfStatement;
-import statements.MainFunctionNode;
-import statements.While;
+import statements.*;
 
 import java.util.*;
 
@@ -80,6 +77,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
 
     @Override
     public NameAndValue visitIdentifier(AntlrTestParser.IdentifierContext ctx) {
+
         NameAndValue nameAndValue = new NameAndValue(ctx.NAME().getText(),
                 ctx.NUM().getText()
         );
@@ -206,5 +204,29 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
     @Override
     public Base visitBreak_Rule(AntlrTestParser.Break_RuleContext ctx) {
         return new BrakeStatement();
+    }
+
+    @Override
+    public Base visitFunction(AntlrTestParser.FunctionContext ctx) {
+        List<Base> statements = new ArrayList<>();
+        List<Parameter>parameters = new ArrayList<>();
+        for (int i = 0; i < ctx.statement().size(); i++) {
+
+            for (int j = 0; j < ctx.statement(i).statement_rules().size(); j++) {
+                for (int k = 0; k < ctx.statement(i).statement_rules(j).expression().size() - 1; k++) {
+                    statements.add(visit(ctx.statement(i).statement_rules(j).expression(k)));
+                }
+                statements.add(visit(ctx.statement(i).statement_rules(j)));
+            }
+            // statements.add(visit(ctx.statement(i)));
+        }
+        for (int i = 0; i < ctx.parameter().size(); i++) {
+            parameters.add((Parameter) visit(ctx.parameter(i)));
+        }
+
+
+        Function function = new Function();
+        code.add(function.toString());
+        return function;
     }
 }

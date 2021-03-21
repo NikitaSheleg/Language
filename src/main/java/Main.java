@@ -14,8 +14,8 @@ import java.nio.file.Paths;
 public class Main {
     public static void main(String[] args) {
 
-
-        CharStream inputStream = CharStreams.fromString(
+        Main obj = new Main();
+      /*  CharStream inputStream = CharStreams.fromString(
                 "mainauf" +
                         "{" +
                         "Integer a=3" +
@@ -30,16 +30,15 @@ public class Main {
                         "left -- b;" +
                         "right ++ b;" +
                         "}" +
-                        "}");
+                        "}");*/
+        CharStream inputStream = null;
+        try {
+            inputStream = CharStreams.fromString(obj.readFileAsString("src/CodeSample.auf"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-//"if(1>2){1-2}else if(1<2){if(1==1){3-2} else{1-3}} else{1-4}"
-     /*"Integer a =6;" +
-                                "Integer b= 6;" +
-                                "if(a>b){7*7;}" +
-                                "else if(a==b){4*5;}" +
-                                "else{2*2;}"*/
 
-//for(Integer a = 2 a<5 a=8){1-5}
         AntlrTestLexer lexer = new AntlrTestLexer(inputStream);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         AntlrTestParser parser = new AntlrTestParser(tokens);
@@ -52,7 +51,7 @@ public class Main {
 
 
 
-        Main obj = new Main();
+
         String className = "src/main/java/Test.java";
         String command = "javac " + className;
         String output = obj.executeCommand(command);
@@ -84,22 +83,20 @@ public class Main {
 
     }
 
-    public  void compileClass() {
-        System.setProperty("java.home", "C:\\Users\\User\\.jdks\\corretto-1.8.0_262");   // Set JDK path it will help to get compiler
-        File root = new File("/src");   // Source Directory
-        File sourceFile = new File(root, "com/main/Test.java");    // Java file name with package
-        sourceFile.getParentFile().mkdirs();
-        try {
-            new FileWriter(sourceFile).close();  // Read Java file
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+
+
+    private String readFileAsString(String filePath) throws IOException {
+        StringBuffer fileData = new StringBuffer();
+        BufferedReader reader = new BufferedReader(
+                new FileReader(filePath));
+        char[] buf = new char[1024];
+        int numRead=0;
+        while((numRead=reader.read(buf)) != -1){
+            String readData = String.valueOf(buf, 0, numRead);
+            fileData.append(readData);
         }
-
-
-
-        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-        System.out.println(compiler.run(null, null, null, sourceFile.getPath()));
+        reader.close();
+        return fileData.toString();
     }
 }
 
