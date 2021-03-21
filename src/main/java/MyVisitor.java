@@ -244,4 +244,9 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
         else
             return new Parameter(ctx.NUM().getText());
     }
+
+    @Override
+    public Base visitReturn_Rule(AntlrTestParser.Return_RuleContext ctx) {
+        return new ReturnStatement(visit(ctx.expression()));
+    }
 }
