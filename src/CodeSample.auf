@@ -11,6 +11,8 @@
         left -- b;
         right ++ b;
     }
+
+    wuf func(a);
 }
 
 auf Integer func(Integer v){

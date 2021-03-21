@@ -192,6 +192,16 @@ public interface AntlrTestListener extends ParseTreeListener {
 	 */
 	void exitMainFunction(AntlrTestParser.MainFunctionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link AntlrTestParser#function_call}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunction_call(AntlrTestParser.Function_callContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AntlrTestParser#function_call}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunction_call(AntlrTestParser.Function_callContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link AntlrTestParser#return_Rule}.
 	 * @param ctx the parse tree
 	 */

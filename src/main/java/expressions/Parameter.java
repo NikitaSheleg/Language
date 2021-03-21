@@ -21,6 +21,7 @@ public class Parameter extends Expression {
     public String toString() {
         if (number != null)
             return number.toString();
+        else if (type == null) return name;
         else return type + " " + name;
     }
 }

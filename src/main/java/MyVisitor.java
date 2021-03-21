@@ -249,4 +249,13 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
     public Base visitReturn_Rule(AntlrTestParser.Return_RuleContext ctx) {
         return new ReturnStatement(visit(ctx.expression()));
     }
+
+    @Override
+    public Base visitFunction_call(AntlrTestParser.Function_callContext ctx) {
+        List<Base> parameters = new ArrayList<>();
+        for (int i = 0; i < ctx.parameter().size(); i++) {
+            parameters.add(visit(ctx.parameter(i)));
+        }
+        return new FunctionCall(parameters,ctx.NAME().getText(),"Test");
+    }
 }

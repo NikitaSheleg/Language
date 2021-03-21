@@ -1,4 +1,6 @@
 public class Test {
+    private static Test test = new Test();
+
     public static void main(String[] args) {
         Integer a = 3;
         Integer b = 12;
@@ -12,6 +14,7 @@ public class Test {
             --b;
             b++;
         }
+        test.func(a);
     }
 
     Integer func(Integer v) {
@@ -21,7 +24,6 @@ public class Test {
         if (1 > 2) {
             --1;
         }
-        return 2;
     }
 
     Integer fuck(Integer v, Integer f) {
@@ -31,6 +33,5 @@ public class Test {
         if (1 > 2) {
             --1;
         }
-        return 2;
     }
 }

@@ -119,6 +119,12 @@ public interface AntlrTestVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMainFunction(AntlrTestParser.MainFunctionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link AntlrTestParser#function_call}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunction_call(AntlrTestParser.Function_callContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link AntlrTestParser#return_Rule}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

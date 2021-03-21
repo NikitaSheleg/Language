@@ -11,6 +11,7 @@ public class Converter {
 
     public void toJava(List<String> code, Path path) {
         this.code.add("public class Test{");
+        this.code.add("private static Test test = new Test();");
         this.code.addAll(code);
         this.code.add("}");
 
