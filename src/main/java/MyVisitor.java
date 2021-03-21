@@ -6,6 +6,7 @@ import expressions.Math;
 import expressions.Number;
 import statements.*;
 
+import java.awt.print.Paper;
 import java.util.*;
 
 public class MyVisitor extends AntlrTestBaseVisitor<Base> {
@@ -152,11 +153,16 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
 
         Base defaultRespond = null;
         if (ctx.mainFunction() != null) {
-            defaultRespond = visit(ctx.mainFunction());
+            defaultRespond = visit(ctx.mainFunction(0));
         }
-
-
+        if (ctx.function() != null) {
+            for (int i = 0; i < ctx.function().size(); i++) {
+                defaultRespond = visit(ctx.function(i));
+            }
+        }
         return defaultRespond;
+
+
     }
 
     @Override
@@ -209,9 +215,8 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
     @Override
     public Base visitFunction(AntlrTestParser.FunctionContext ctx) {
         List<Base> statements = new ArrayList<>();
-        List<Parameter>parameters = new ArrayList<>();
+        List<Base> parameters = new ArrayList<>();
         for (int i = 0; i < ctx.statement().size(); i++) {
-
             for (int j = 0; j < ctx.statement(i).statement_rules().size(); j++) {
                 for (int k = 0; k < ctx.statement(i).statement_rules(j).expression().size() - 1; k++) {
                     statements.add(visit(ctx.statement(i).statement_rules(j).expression(k)));
@@ -221,12 +226,22 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
             // statements.add(visit(ctx.statement(i)));
         }
         for (int i = 0; i < ctx.parameter().size(); i++) {
-            parameters.add((Parameter) visit(ctx.parameter(i)));
+            parameters.add(visit(ctx.parameter(i)));
         }
 
 
-        Function function = new Function();
+        Function function = new Function(parameters, ctx.NAME().getText(), ctx.TYPE().getText(), statements);
         code.add(function.toString());
         return function;
+    }
+
+    @Override
+    public Base visitParameter(AntlrTestParser.ParameterContext ctx) {
+        if (ctx.TYPE() != null)
+            return new Parameter(ctx.TYPE().getText(), ctx.NAME().getText());
+        else if (ctx.NAME() != null)
+            return new Parameter(ctx.NAME().getText());
+        else
+            return new Parameter(ctx.NUM().getText());
     }
 }

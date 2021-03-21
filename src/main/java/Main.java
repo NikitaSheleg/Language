@@ -47,9 +47,7 @@ public class Main {
         Base result = visitor.visit(tree);
         Converter converter = new Converter();
         converter.toJava(MyVisitor.code, Paths.get("src/main/java/Test.java"));
-       // System.out.println(result);
-
-
+        // System.out.println(result);
 
 
         String className = "src/main/java/Test.java";
@@ -57,7 +55,6 @@ public class Main {
         String output = obj.executeCommand(command);
 
         System.out.println(output);
-
 
 
     }
@@ -84,14 +81,13 @@ public class Main {
     }
 
 
-
     private String readFileAsString(String filePath) throws IOException {
         StringBuffer fileData = new StringBuffer();
         BufferedReader reader = new BufferedReader(
                 new FileReader(filePath));
         char[] buf = new char[1024];
-        int numRead=0;
-        while((numRead=reader.read(buf)) != -1){
+        int numRead = 0;
+        while ((numRead = reader.read(buf)) != -1) {
             String readData = String.valueOf(buf, 0, numRead);
             fileData.append(readData);
         }

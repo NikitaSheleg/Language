@@ -51,4 +51,4 @@ statement_rules:(return_Rule|if_Rule|while_Rule|for_Rule|break_Rule|continue_Rul
 
 statement:statement_rules+;
 
-cool:(statement+|function|expression+)+|mainFunction ;
+cool:(function+|mainFunction)* ;

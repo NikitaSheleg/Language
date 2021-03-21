@@ -12,3 +12,5 @@
         right ++ b;
     }
 }
+
+auf Integer func(Integer v){}

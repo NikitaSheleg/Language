@@ -6,30 +6,38 @@ import expressions.Parameter;
 import java.util.List;
 
 public class Function extends Base {
-    private Parameter parameter;
+    private List<Base> parameters;
     private String name, type;
-    private List<Statement> statements;
+    private List<Base> statements;
 
     public Function() {
     }
 
-    public Function(Parameter parameter, String name, String type, List<Statement> statements) {
-        this.parameter = parameter;
-        this.statements = statements;
+    public Function(List<Base> parameters, String name, String type, List<Base> statements) {
+        this.parameters = parameters;
         this.name = name;
         this.type = type;
+        this.statements = statements;
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (Base stat : statements) {
-            builder.append(stat.toString()).append(" ");
+        StringBuilder params = new StringBuilder();
+        if (statements != null) {
+            for (Base stat : statements) {
+                builder.append(stat.toString()).append(" ");
+            }
+        }
+        if (parameters != null) {
+            for (Base parameter : parameters) {
+                params.append(parameter.toString());
+            }
         }
         return type +
                 " " +
                 name + " ( " +
-                parameter.toString() +
+                params +
                 ")" +
                 "{" + builder + "}"
                 ;

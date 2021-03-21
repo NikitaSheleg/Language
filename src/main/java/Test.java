@@ -14,3 +14,6 @@ class Test {
         }
     }
 }
+
+    Integer func(Integer v) {
+    }
