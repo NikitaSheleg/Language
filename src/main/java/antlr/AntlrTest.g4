@@ -38,16 +38,17 @@ expression:
 identifier:NAME '=' NUM;
 
 WHITESPACE: [ \t\r\n]+ -> skip;
+function:  'auf' TYPE NAME '(' parameter ')' '{' statement '}';
+mainFunction: MAIN_FUNCTION_ID'{' statement* '}';
 
 return_Rule:  'return' expression ';' ;
 if_Rule: 'if' '(' expression')' '{'(statement';')*  '}' ('else' ('if' '(' expression')')? '{'statement '}')*;
-while_Rule:'while' '(' expression ')' '{'statement* '}';
+while_Rule:'while' '(' expression ')' '{'(statement';')* '}';
 for_Rule:'for' '(' parameter';'expression';'expression')' '{'statement*'}' ;
-break_Rule:'break;';
-continue_Rule:'continue;';
+break_Rule:'break';
+continue_Rule:'continue';
 statement_rules:(return_Rule|if_Rule|while_Rule|for_Rule|break_Rule|continue_Rule|expression+);
 
 statement:statement_rules+;
-function:  'auf' TYPE NAME '(' parameter ')' '{' statement '}';
-mainFunction: MAIN_FUNCTION_ID'{' statement* '}';
+
 cool:(statement+|function|expression+)+|mainFunction ;

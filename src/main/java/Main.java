@@ -1,12 +1,14 @@
 import antlr.AntlrTestLexer;
 import antlr.AntlrTestParser;
+import base.Base;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import javax.tools.JavaCompiler;
+import javax.tools.ToolProvider;
+import java.io.*;
 import java.nio.file.Paths;
 
 public class Main {
@@ -19,6 +21,10 @@ public class Main {
                         "Integer a=3" +
                         "Integer b= 12" +
                         "Integer c = 9" +
+                        "while(a<b){" +
+                        "left -- a;" +
+                        "break;" +
+                        "}" +
                        "if(a<b){" +
                         " right ++ a;" +
                         "left -- b;" +
@@ -42,7 +48,16 @@ public class Main {
         Base result = visitor.visit(tree);
         Converter converter = new Converter();
         converter.toJava(MyVisitor.code, Paths.get("src/main/java/Test.java"));
-        System.out.println(result);
+       // System.out.println(result);
+
+
+
+        Main obj = new Main();
+        String className = "src/main/java/Test.java";
+        String command = "javac " + className;
+        String output = obj.executeCommand(command);
+
+        System.out.println(output);
 
 
 
@@ -58,7 +73,7 @@ public class Main {
             BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
             String line = "";
             while ((line = reader.readLine()) != null) {
-                output.append(line + "\n");
+                output.append(line).append("\n");
             }
 
         } catch (Exception e) {
@@ -67,6 +82,24 @@ public class Main {
 
         return output.toString();
 
+    }
+
+    public  void compileClass() {
+        System.setProperty("java.home", "C:\\Users\\User\\.jdks\\corretto-1.8.0_262");   // Set JDK path it will help to get compiler
+        File root = new File("/src");   // Source Directory
+        File sourceFile = new File(root, "com/main/Test.java");    // Java file name with package
+        sourceFile.getParentFile().mkdirs();
+        try {
+            new FileWriter(sourceFile).close();  // Read Java file
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+
+
+        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+        System.out.println(compiler.run(null, null, null, sourceFile.getPath()));
     }
 }
 

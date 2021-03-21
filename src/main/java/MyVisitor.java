@@ -1,5 +1,13 @@
 import antlr.AntlrTestBaseVisitor;
 import antlr.AntlrTestParser;
+import base.Base;
+import expressions.*;
+import expressions.Math;
+import expressions.Number;
+import statements.BrakeStatement;
+import statements.IfStatement;
+import statements.MainFunctionNode;
+import statements.While;
 
 import java.util.*;
 
@@ -136,7 +144,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
                         ctx.expression().getChild(1).getText()), statements
 
         );
-        // code.add(state.toString());
+        //  code.add(state.toString());
         return state;
     }
 
@@ -181,17 +189,22 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
         for (int i = 0; i < ctx.statement().size(); i++) {
 
             for (int j = 0; j < ctx.statement(i).statement_rules().size(); j++) {
-                for (int k = 0; k <ctx.statement(i).statement_rules(j).expression().size(); k++) {
+                for (int k = 0; k < ctx.statement(i).statement_rules(j).expression().size() - 1; k++) {
                     statements.add(visit(ctx.statement(i).statement_rules(j).expression(k)));
                 }
-
+                statements.add(visit(ctx.statement(i).statement_rules(j)));
             }
-            statements.add(visit(ctx.statement(i)));
+            // statements.add(visit(ctx.statement(i)));
         }
 
 
         MainFunctionNode mainFunctionNode = new MainFunctionNode(statements);
         code.add(mainFunctionNode.toString());
         return mainFunctionNode;
+    }
+
+    @Override
+    public Base visitBreak_Rule(AntlrTestParser.Break_RuleContext ctx) {
+        return new BrakeStatement();
     }
 }

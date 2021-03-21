@@ -184,6 +184,30 @@ public class AntlrTestBaseListener implements AntlrTestListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFunction(AntlrTestParser.FunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunction(AntlrTestParser.FunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMainFunction(AntlrTestParser.MainFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMainFunction(AntlrTestParser.MainFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterReturn_Rule(AntlrTestParser.Return_RuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -275,30 +299,6 @@ public class AntlrTestBaseListener implements AntlrTestListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitStatement(AntlrTestParser.StatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterFunction(AntlrTestParser.FunctionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFunction(AntlrTestParser.FunctionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterMainFunction(AntlrTestParser.MainFunctionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitMainFunction(AntlrTestParser.MainFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

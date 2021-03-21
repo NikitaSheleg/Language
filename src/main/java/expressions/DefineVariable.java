@@ -1,0 +1,22 @@
+package expressions;
+
+import expressions.Expression;
+
+public class DefineVariable extends Expression {
+    private String type;
+    private NameAndValue nameAndValue;
+
+    public DefineVariable(String type, NameAndValue nameAndValue) {
+        this.type = type;
+        this.nameAndValue=nameAndValue;
+    }
+
+
+
+
+
+    @Override
+    public String toString() {
+        return type + " " +nameAndValue.toString();
+    }
+}

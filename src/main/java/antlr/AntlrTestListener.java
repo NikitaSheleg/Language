@@ -172,6 +172,26 @@ public interface AntlrTestListener extends ParseTreeListener {
 	 */
 	void exitIdentifier(AntlrTestParser.IdentifierContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link AntlrTestParser#function}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunction(AntlrTestParser.FunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AntlrTestParser#function}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunction(AntlrTestParser.FunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AntlrTestParser#mainFunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterMainFunction(AntlrTestParser.MainFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AntlrTestParser#mainFunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitMainFunction(AntlrTestParser.MainFunctionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link AntlrTestParser#return_Rule}.
 	 * @param ctx the parse tree
 	 */
@@ -251,26 +271,6 @@ public interface AntlrTestListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitStatement(AntlrTestParser.StatementContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link AntlrTestParser#function}.
-	 * @param ctx the parse tree
-	 */
-	void enterFunction(AntlrTestParser.FunctionContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link AntlrTestParser#function}.
-	 * @param ctx the parse tree
-	 */
-	void exitFunction(AntlrTestParser.FunctionContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link AntlrTestParser#mainFunction}.
-	 * @param ctx the parse tree
-	 */
-	void enterMainFunction(AntlrTestParser.MainFunctionContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link AntlrTestParser#mainFunction}.
-	 * @param ctx the parse tree
-	 */
-	void exitMainFunction(AntlrTestParser.MainFunctionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link AntlrTestParser#cool}.
 	 * @param ctx the parse tree
