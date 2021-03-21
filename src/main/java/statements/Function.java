@@ -31,8 +31,9 @@ public class Function extends Base {
         }
         if (parameters != null) {
             for (Base parameter : parameters) {
-                params.append(parameter.toString());
+                params.append(parameter.toString()).append(",");
             }
+            params.deleteCharAt(params.length()-1);
         }
         return type +
                 " " +
