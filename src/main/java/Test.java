@@ -24,6 +24,7 @@ public class Test {
         if (1 > 2) {
             --1;
         }
+        return 2;
     }
 
     Integer fuck(Integer v, Integer f) {
@@ -33,5 +34,6 @@ public class Test {
         if (1 > 2) {
             --1;
         }
+        return 2;
     }
 }

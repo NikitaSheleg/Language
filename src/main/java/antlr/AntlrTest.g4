@@ -38,7 +38,7 @@ expression:
 identifier:NAME '=' NUM;
 
 WHITESPACE: [ \t\r\n]+ -> skip;
-function:  'auf' TYPE NAME '(' parameter (',' parameter)* ')' '{' statement* return_Rule'}';
+function:  'auf' TYPE NAME '(' parameter (',' parameter)* ')' '{' statement*'}';
 mainFunction: MAIN_FUNCTION_ID'{' statement* '}';
 function_call: 'wuf' NAME '(' (parameter) (','parameter)* ')'';';
 
