@@ -18,7 +18,7 @@
 auf Integer func(Integer v){
         while(1>3){
              right ++ 2;
-        }
+
 
     if(1>2){
     left -- 1;

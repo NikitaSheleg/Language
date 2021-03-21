@@ -1,23 +1,34 @@
 import antlr.AntlrTestBaseListener;
 import antlr.AntlrTestParser;
-import org.antlr.v4.runtime.TokenStream;
+import org.antlr.v4.runtime.*;
 
-public class MyWalker extends AntlrTestBaseListener {
-    AntlrTestParser parser;
+import javax.swing.*;
+import java.awt.*;
+import java.util.Collections;
+import java.util.List;
 
-    public MyWalker(AntlrTestParser parser) {
-        this.parser = parser;
-    }
-
+public class MyWalker extends BaseErrorListener {
+    private static boolean errors=false;
     @Override
-    public void enterFunction(AntlrTestParser.FunctionContext ctx) {
-        TokenStream tokens = parser.getTokenStream();
-        String type = "void";
-        if (ctx.TYPE() != null) {
-            type =ctx.TYPE().getText();
-        }
-
+    public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol, int line, int charPositionInLine, String msg, RecognitionException e) {
+        List<String> stack = ((Parser) recognizer).getRuleInvocationStack();
+        Collections.reverse(stack);
+        StringBuilder buf = new StringBuilder();
+        buf.append("rule stack: ").append(stack).append(" ");
+        buf.append("line ").append(line).append(":").append(charPositionInLine).append(" at ").append(offendingSymbol).append(": ").append(msg);
+        JDialog dialog = new JDialog();
+        Container contentPane = dialog.getContentPane();
+        contentPane.add(new JLabel(buf.toString()));
+        contentPane.setBackground(Color.white);
+        dialog.setTitle("Syntax error");
+        dialog.pack();
+        dialog.setLocationRelativeTo(null);
+        dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        dialog.setVisible(true);
+        errors=true;
     }
 
-
+    public static boolean isErrors() {
+        return errors;
+    }
 }

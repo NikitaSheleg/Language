@@ -42,9 +42,16 @@ public class Main {
         AntlrTestLexer lexer = new AntlrTestLexer(inputStream);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         AntlrTestParser parser = new AntlrTestParser(tokens);
+        parser.removeErrorListeners(); // remove ConsoleErrorListener
+        parser.addErrorListener(new MyWalker()); // add ours
+
         ParseTree tree = parser.cool(); // parse
         MyVisitor visitor = new MyVisitor();
+
+
         Base result = visitor.visit(tree);
+        if (MyWalker.isErrors())
+            return;
         Converter converter = new Converter();
         converter.toJava(MyVisitor.code, Paths.get("src/main/java/Test.java"));
         // System.out.println(result);
