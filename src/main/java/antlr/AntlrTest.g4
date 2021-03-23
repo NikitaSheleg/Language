@@ -21,7 +21,7 @@ TYPE: 'Integer'|'Double';
 parameter: (TYPE NAME|NUM|NAME)?;
 
 expression:
- UNARY_OPERATOR_SIDE UNARY_OPERATOR expression  #unaryOperator
+ UNARY_OPERATOR_SIDE UNARY_OPERATOR NAME  #unaryOperator
 | TYPE ((NAME '=' expression|)identifier) #defineVariable
 | '('expression')' #parens
 | expression operation =(MULTIPLICATION|DIV) expression #mulDiv

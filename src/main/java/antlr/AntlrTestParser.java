@@ -323,9 +323,7 @@ public class AntlrTestParser extends Parser {
 	public static class UnaryOperatorContext extends ExpressionContext {
 		public TerminalNode UNARY_OPERATOR_SIDE() { return getToken(AntlrTestParser.UNARY_OPERATOR_SIDE, 0); }
 		public TerminalNode UNARY_OPERATOR() { return getToken(AntlrTestParser.UNARY_OPERATOR, 0); }
-		public ExpressionContext expression() {
-			return getRuleContext(ExpressionContext.class,0);
-		}
+		public TerminalNode NAME() { return getToken(AntlrTestParser.NAME, 0); }
 		public UnaryOperatorContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -474,7 +472,7 @@ public class AntlrTestParser extends Parser {
 				setState(38);
 				match(UNARY_OPERATOR);
 				setState(39);
-				expression(12);
+				match(NAME);
 				}
 				break;
 			case 2:
@@ -1729,7 +1727,7 @@ public class AntlrTestParser extends Parser {
 		"\2\2\2\26\u00c6\3\2\2\2\30\u00c8\3\2\2\2\32\u00d6\3\2\2\2\34\u00d9\3\2"+
 		"\2\2\36\u00e5\3\2\2\2 !\7 \2\2!%\7\37\2\2\"%\7\25\2\2#%\7\37\2\2$ \3\2"+
 		"\2\2$\"\3\2\2\2$#\3\2\2\2$%\3\2\2\2%\3\3\2\2\2&\'\b\3\1\2\'(\7\26\2\2"+
-		"()\7\35\2\2)<\5\4\3\16*/\7 \2\2+,\7\37\2\2,-\7\3\2\2-\60\5\4\3\2.\60\3"+
+		"()\7\35\2\2)<\7\37\2\2*/\7 \2\2+,\7\37\2\2,-\7\3\2\2-\60\5\4\3\2.\60\3"+
 		"\2\2\2/+\3\2\2\2/.\3\2\2\2\60\61\3\2\2\2\61<\5\6\4\2\62\63\7\4\2\2\63"+
 		"\64\5\4\3\2\64\65\7\5\2\2\65<\3\2\2\2\66\67\7\7\2\2\67<\5\4\3\68<\7\37"+
 		"\2\29<\7\25\2\2:<\5\6\4\2;&\3\2\2\2;*\3\2\2\2;\62\3\2\2\2;\66\3\2\2\2"+

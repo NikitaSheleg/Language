@@ -12,7 +12,7 @@ import java.util.*;
 public class MyVisitor extends AntlrTestBaseVisitor<Base> {
 
 
-    private Map<Map<String, String>, Object> memory = new HashMap<>();
+    private static  Map<String, String> memory = new HashMap<>();
     private Map<String, String> currentVariable;
 
     public static List<String> code = new ArrayList<>();
@@ -24,19 +24,18 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
 
     @Override
     public Base visitMulDiv(AntlrTestParser.MulDivContext ctx) {
-        Base left = visit(ctx.expression(0));
-        Base right = visit(ctx.expression(1));
+
         Math math;
         if (ctx.operation.getType() == AntlrTestParser.PLUS) {
             math = new Math(
                     "mult",
-                    left.toString(),
-                    right.toString());
+                    (Expression) visit(ctx.expression(0)),
+                    (Expression) visit(ctx.expression(1)));
         } else {
             math = new Math(
                     "div",
-                    left.toString(),
-                    right.toString());
+                    (Expression) visit(ctx.expression(0)),
+                    (Expression) visit(ctx.expression(1)));
         }
         // code.add(math.toString());
         return math;
@@ -45,19 +44,18 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
 
     @Override
     public Base visitPlusMinus(AntlrTestParser.PlusMinusContext ctx) {
-        Base left = visit(ctx.expression(0));
-        Base right = visit(ctx.expression(1));
+
         Math math;
         if (ctx.operation.getType() == AntlrTestParser.PLUS) {
             math = new Math(
                     "plus",
-                    left.toString(),
-                    right.toString());
+                    (Expression) visit(ctx.expression(0)),
+                    (Expression) visit(ctx.expression(1)));
         } else {
             math = new Math(
                     "minus",
-                    left.toString(),
-                    right.toString());
+                    (Expression) visit(ctx.expression(0)),
+                    (Expression) visit(ctx.expression(1)));
         }
         // code.add(math.toString());
         return math;
@@ -65,7 +63,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
 
     @Override
     public Base visitParens(AntlrTestParser.ParensContext ctx) {
-        return visit(ctx.expression());
+        return new Parens((Expression) visit(ctx.expression()));
     }
 
     @Override
@@ -93,9 +91,8 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
         if (ctx.expression() != null)
             name = String.valueOf(ctx.expression().getChild(0));
         else name = ctx.identifier().NAME().getText();
-        currentVariable = new HashMap<>();
-        currentVariable.put(currentType, name);
-        memory.put(currentVariable, null);
+
+        memory.put(name, currentType);
         DefineVariable defineVariable = new DefineVariable(ctx.TYPE().getText(),
                 visitIdentifier((AntlrTestParser.IdentifierContext) ctx.getChild(1))
         );
@@ -177,12 +174,20 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
 
     @Override
     public Base visitName(AntlrTestParser.NameContext ctx) {
+
         return new Expression(ctx.NAME().getText());
     }
 
     @Override
     public Base visitUnaryOperator(AntlrTestParser.UnaryOperatorContext ctx) {
-        return new UnaryOperator(ctx.expression().getText(),
+        if (!memory.containsKey(ctx.NAME().getText()))
+            try {
+                throw new Exception("no such variable");
+            } catch (Exception e) {
+                e.printStackTrace();
+                Thread.currentThread().interrupt();
+            }
+        return new UnaryOperator(ctx.NAME().getText(),
                 ctx.UNARY_OPERATOR().getText(),
                 ctx.UNARY_OPERATOR_SIDE().getText());
     }
@@ -256,6 +261,6 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
         for (int i = 0; i < ctx.parameter().size(); i++) {
             parameters.add(visit(ctx.parameter(i)));
         }
-        return new FunctionCall(parameters,ctx.NAME().getText(),"Test");
+        return new FunctionCall(parameters, ctx.NAME().getText(), "Test");
     }
 }
