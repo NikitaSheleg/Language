@@ -8,6 +8,16 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface AntlrTestListener extends ParseTreeListener {
 	/**
+	 * Enter a parse tree produced by {@link AntlrTestParser#dbl}.
+	 * @param ctx the parse tree
+	 */
+	void enterDbl(AntlrTestParser.DblContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AntlrTestParser#dbl}.
+	 * @param ctx the parse tree
+	 */
+	void exitDbl(AntlrTestParser.DblContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link AntlrTestParser#parameter}.
 	 * @param ctx the parse tree
 	 */

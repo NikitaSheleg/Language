@@ -4,7 +4,7 @@ ID : [a-z]+ | [A-Z]+ ;
 WS : [ \t\r\n]+ -> skip ;
 digit : 'digit' NUM+;*/
 
-
+PT:',';
 NUM :  [0-9]+;
 UNARY_OPERATOR_SIDE: 'left'|'right';
 MULTIPLICATION : '*';
@@ -17,12 +17,14 @@ UNARY_OPERATOR: '--'|'++';
 MAIN_FUNCTION_ID:'mainauf';
 NAME : [a-z]+|[A-Z]+;
 TYPE: 'Integer'|'Double';
+dbl : NUM+ PT NUM+
 
+    ;
 parameter: (TYPE NAME|NUM|NAME)?;
 
 expression:
  UNARY_OPERATOR_SIDE UNARY_OPERATOR NAME  #unaryOperator
-| TYPE ((NAME '=' expression|)identifier) #defineVariable
+| TYPE ((NAME '=' expression)|identifier) #defineVariable
 | '('expression')' #parens
 | expression operation =(MULTIPLICATION|DIV) expression #mulDiv
 | expression operation =(PLUS|MINUS) expression #plusMinus
@@ -31,11 +33,11 @@ expression:
 | expression '^' expression #idk
 | '!' expression #not
 | NAME #name
-| NUM #num
+| (NUM|dbl) #num
 |identifier #id
 ;
 
-identifier:NAME '=' NUM;
+identifier:NAME '=' NUM|dbl;
 
 WHITESPACE: [ \t\r\n]+ -> skip;
 function:  'auf' TYPE NAME '(' parameter (',' parameter)* ')' '{' statement*'}';

@@ -16,6 +16,18 @@ public class AntlrTestBaseListener implements AntlrTestListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDbl(AntlrTestParser.DblContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDbl(AntlrTestParser.DblContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterParameter(AntlrTestParser.ParameterContext ctx) { }
 	/**
 	 * {@inheritDoc}

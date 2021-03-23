@@ -11,6 +11,12 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface AntlrTestVisitor<T> extends ParseTreeVisitor<T> {
 	/**
+	 * Visit a parse tree produced by {@link AntlrTestParser#dbl}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDbl(AntlrTestParser.DblContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link AntlrTestParser#parameter}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
