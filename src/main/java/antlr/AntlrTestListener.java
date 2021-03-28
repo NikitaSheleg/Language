@@ -40,18 +40,6 @@ public interface AntlrTestListener extends ParseTreeListener {
 	 */
 	void exitDefineVariable(AntlrTestParser.DefineVariableContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code idk}
-	 * labeled alternative in {@link AntlrTestParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterIdk(AntlrTestParser.IdkContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code idk}
-	 * labeled alternative in {@link AntlrTestParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitIdk(AntlrTestParser.IdkContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code parens}
 	 * labeled alternative in {@link AntlrTestParser#expression}.
 	 * @param ctx the parse tree
@@ -63,18 +51,6 @@ public interface AntlrTestListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitParens(AntlrTestParser.ParensContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code not}
-	 * labeled alternative in {@link AntlrTestParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterNot(AntlrTestParser.NotContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code not}
-	 * labeled alternative in {@link AntlrTestParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitNot(AntlrTestParser.NotContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code plusMinus}
 	 * labeled alternative in {@link AntlrTestParser#expression}.
@@ -124,6 +100,54 @@ public interface AntlrTestListener extends ParseTreeListener {
 	 */
 	void exitNum(AntlrTestParser.NumContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code mulDiv}
+	 * labeled alternative in {@link AntlrTestParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterMulDiv(AntlrTestParser.MulDivContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code mulDiv}
+	 * labeled alternative in {@link AntlrTestParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitMulDiv(AntlrTestParser.MulDivContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code idk}
+	 * labeled alternative in {@link AntlrTestParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdk(AntlrTestParser.IdkContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code idk}
+	 * labeled alternative in {@link AntlrTestParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdk(AntlrTestParser.IdkContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code not}
+	 * labeled alternative in {@link AntlrTestParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterNot(AntlrTestParser.NotContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code not}
+	 * labeled alternative in {@link AntlrTestParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitNot(AntlrTestParser.NotContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code varEqlsFunc}
+	 * labeled alternative in {@link AntlrTestParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterVarEqlsFunc(AntlrTestParser.VarEqlsFuncContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code varEqlsFunc}
+	 * labeled alternative in {@link AntlrTestParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitVarEqlsFunc(AntlrTestParser.VarEqlsFuncContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code name}
 	 * labeled alternative in {@link AntlrTestParser#expression}.
 	 * @param ctx the parse tree
@@ -159,18 +183,6 @@ public interface AntlrTestListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitLogic(AntlrTestParser.LogicContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code mulDiv}
-	 * labeled alternative in {@link AntlrTestParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterMulDiv(AntlrTestParser.MulDivContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code mulDiv}
-	 * labeled alternative in {@link AntlrTestParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitMulDiv(AntlrTestParser.MulDivContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link AntlrTestParser#identifier}.
 	 * @param ctx the parse tree
