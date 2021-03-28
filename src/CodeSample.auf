@@ -7,7 +7,7 @@
         break;
     }
     if(a<b){
-        right ++ a;
+        right ++ 2;
         left -- b;
         right ++ b;
     }
@@ -17,10 +17,10 @@
 
 auf Integer func(Integer v){
 
+Integer d = (2+4)
 
 
-
-     return 2;
+     return (1+2);
     }
 
 auf Integer fuck(Integer v,Integer f){

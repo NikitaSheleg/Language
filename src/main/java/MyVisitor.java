@@ -92,7 +92,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
     }
 
     @Override
-    public Base visitDefineVariable(AntlrTestParser.DefineVariableContext ctx)  {
+    public Base visitDefineVariable(AntlrTestParser.DefineVariableContext ctx) {
         String currentType = ctx.TYPE().getText();
         String name, value = null;
         if (ctx.identifier() != null) {
@@ -103,7 +103,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
         }
         if (ctx.expression() != null &&
                 ctx.expression().getChild(0) instanceof AntlrTestParser.DblContext) {
-            if(!currentType.equals("Float"))
+            if (!currentType.equals("Float"))
                 try {
                     throw new Exception("illegal var type");
                 } catch (Exception e) {
@@ -111,6 +111,8 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
                     MyWalker.setErrors(true);
                 }
             value = visit(ctx.expression().getChild(0)).toString();
+        } else if (ctx.expression() != null) {
+            value = visit(ctx.expression()).toString();
         }
 
 
@@ -250,12 +252,22 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
                 }
                 statements.add(visit(ctx.statement(i).statement_rules(j)));
             }
-            // statements.add(visit(ctx.statement(i)));
         }
         for (int i = 0; i < ctx.parameter().size(); i++) {
             parameters.add(visit(ctx.parameter(i)));
         }
-
+        for (int i = 0; i < ctx.return_Rule().expression().getChild(0).getChildCount(); i++) {
+            if (ctx.return_Rule().expression().getChild(0).getChild(i).getText().equals(".") &&
+                    !ctx.TYPE().getText().equals("Float")) {
+                try {
+                    throw new Exception("illegal return type");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    MyWalker.setErrors(true);
+                }
+            }
+        }
+        statements.add(visit(ctx.return_Rule()));
 
         Function function = new Function(parameters, ctx.NAME().getText(), ctx.TYPE().getText(), statements);
         code.add(function.toString());
@@ -274,6 +286,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
 
     @Override
     public Base visitReturn_Rule(AntlrTestParser.Return_RuleContext ctx) {
+
         return new ReturnStatement(visit(ctx.expression()));
     }
 

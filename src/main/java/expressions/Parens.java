@@ -9,6 +9,6 @@ public class Parens extends Expression {
 
     @Override
     public String toString() {
-        return "(" + expression.toString() + ");";
+        return "(" + expression.toString() + ")";
     }
 }
