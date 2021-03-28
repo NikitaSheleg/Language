@@ -15,22 +15,6 @@ public class Main {
     public static void main(String[] args) {
 
         Main obj = new Main();
-      /*  CharStream inputStream = CharStreams.fromString(
-                "mainauf" +
-                        "{" +
-                        "Integer a=3" +
-                        "Integer b= 12" +
-                        "Integer c = 9" +
-                        "while(a<b){" +
-                        "left -- a;" +
-                        "break;" +
-                        "}" +
-                       "if(a<b){" +
-                        " right ++ a;" +
-                        "left -- b;" +
-                        "right ++ b;" +
-                        "}" +
-                        "}");*/
         CharStream inputStream = null;
         try {
             inputStream = CharStreams.fromString(obj.readFileAsString("src/CodeSample.auf"));

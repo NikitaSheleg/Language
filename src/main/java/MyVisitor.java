@@ -12,14 +12,21 @@ import java.util.*;
 public class MyVisitor extends AntlrTestBaseVisitor<Base> {
 
 
-    private static  Map<String, String> memory = new HashMap<>();
+    private static Map<String, String> memory = new HashMap<>();
     private Map<String, String> currentVariable;
 
     public static List<String> code = new ArrayList<>();
 
     @Override
     public Number visitNum(AntlrTestParser.NumContext ctx) {
-        return new Number(ctx.NUM().getText());
+        if (ctx.NUM() != null)
+            return new Number(ctx.NUM().getText());
+        else return new Number(ctx.dbl().getText());
+    }
+
+    @Override
+    public Base visitDbl(AntlrTestParser.DblContext ctx) {
+        return new Number(ctx.NUM(0).getText(), ctx.NUM(1).getText());
     }
 
     @Override
@@ -85,17 +92,31 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
 
     @Override
     public Base visitDefineVariable(AntlrTestParser.DefineVariableContext ctx) {
-
+//TODO: bug with double
         String currentType = ctx.TYPE().getText();
-        String name;
-        if (ctx.expression() != null)
-            name = String.valueOf(ctx.expression().getChild(0));
-        else name = ctx.identifier().NAME().getText();
+        String name, value = null;
+        if (ctx.identifier() != null) {
+            name = ctx.identifier().NAME().getText();
+            if (ctx.identifier().dbl() == null) {
+                value = ctx.identifier().NUM().getText();
+            } else {
+                value = visit(ctx.expression()).toString();
+            }
+
+
+        } else {
+            name = ctx.NAME().getText();
+        }
+        if (ctx.expression() != null &&
+                ctx.expression().getChild(0) instanceof AntlrTestParser.DblContext) {
+            value = visit(ctx.expression().getChild(0)).toString();
+        }
+
 
         memory.put(name, currentType);
         DefineVariable defineVariable = new DefineVariable(ctx.TYPE().getText(),
-                visitIdentifier((AntlrTestParser.IdentifierContext) ctx.getChild(1))
-        );
+                new NameAndValue(name, value));
+
         //  code.add(defineVariable.toString());
         if (ctx.expression() != null)
             visit(ctx.expression());

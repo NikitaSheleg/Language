@@ -1,7 +1,7 @@
  mainauf {
     Integer a=3
     Integer b= 12
-    Integer c = 9
+    Float c = 9.23
     while(a<b){
         left -- a;
         break;
