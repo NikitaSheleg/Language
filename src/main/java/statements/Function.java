@@ -6,14 +6,14 @@ import expressions.Parameter;
 import java.util.List;
 
 public class Function extends Base {
-    private List<Base> parameters;
+    private List<Parameter> parameters;
     private String name, type;
     private List<Base> statements;
 
     public Function() {
     }
 
-    public Function(List<Base> parameters, String name, String type, List<Base> statements) {
+    public Function(List<Parameter> parameters, String name, String type, List<Base> statements) {
         this.parameters = parameters;
         this.name = name;
         this.type = type;

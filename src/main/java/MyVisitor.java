@@ -13,8 +13,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
 
 
     private static Map<String, String> memory = new HashMap<>();
-    private Map<String, String> currentVariable;
-
+    private static Map<String, List<Parameter>> functionsMemory = new HashMap<>();
     public static List<String> code = new ArrayList<>();
 
     @Override
@@ -173,14 +172,15 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
     public Base visitCool(AntlrTestParser.CoolContext ctx) {
 
         Base defaultRespond = null;
-        if (ctx.mainFunction() != null) {
-            defaultRespond = visit(ctx.mainFunction(0));
-        }
         if (ctx.function() != null) {
             for (int i = 0; i < ctx.function().size(); i++) {
                 defaultRespond = visit(ctx.function(i));
             }
         }
+        if (ctx.mainFunction() != null) {
+            defaultRespond = visit(ctx.mainFunction(0));
+        }
+
         return defaultRespond;
 
 
@@ -244,7 +244,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
     @Override
     public Base visitFunction(AntlrTestParser.FunctionContext ctx) {
         List<Base> statements = new ArrayList<>();
-        List<Base> parameters = new ArrayList<>();
+        List<Parameter> parameters = new ArrayList<>();
         for (int i = 0; i < ctx.statement().size(); i++) {
             for (int j = 0; j < ctx.statement(i).statement_rules().size(); j++) {
                 for (int k = 0; k < ctx.statement(i).statement_rules(j).expression().size() - 1; k++) {
@@ -254,7 +254,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
             }
         }
         for (int i = 0; i < ctx.parameter().size(); i++) {
-            parameters.add(visit(ctx.parameter(i)));
+            parameters.add(visitParameter(ctx.parameter(i)));
         }
         for (int i = 0; i < ctx.return_Rule().expression().getChild(0).getChildCount(); i++) {
             if (ctx.return_Rule().expression().getChild(0).getChild(i).getText().equals(".") &&
@@ -268,14 +268,14 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
             }
         }
         statements.add(visit(ctx.return_Rule()));
-
+        functionsMemory.put(ctx.NAME().getText(), parameters);
         Function function = new Function(parameters, ctx.NAME().getText(), ctx.TYPE().getText(), statements);
         code.add(function.toString());
         return function;
     }
 
     @Override
-    public Base visitParameter(AntlrTestParser.ParameterContext ctx) {
+    public Parameter visitParameter(AntlrTestParser.ParameterContext ctx) {
         if (ctx.TYPE() != null)
             return new Parameter(ctx.TYPE().getText(), ctx.NAME().getText());
         else if (ctx.NAME() != null)
@@ -292,6 +292,22 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
 
     @Override
     public Base visitFunction_call(AntlrTestParser.Function_callContext ctx) {
+        if (!functionsMemory.containsKey(ctx.NAME().getText())) {
+            try {
+                throw new Exception("illegal function call");
+            } catch (Exception e) {
+                e.printStackTrace();
+                MyWalker.setErrors(true);
+            }
+        } else if (functionsMemory.get(ctx.NAME().getText()).size() != ctx.parameter().size()) {
+            try {
+                throw new Exception("illegal number of function parameters");
+            } catch (Exception e) {
+                e.printStackTrace();
+                MyWalker.setErrors(true);
+            }
+        }
+
         List<Base> parameters = new ArrayList<>();
         for (int i = 0; i < ctx.parameter().size(); i++) {
             parameters.add(visit(ctx.parameter(i)));

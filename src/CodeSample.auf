@@ -7,7 +7,7 @@
         break;
     }
     if(a<b){
-        right ++ 2;
+        right ++ a;
         left -- b;
         right ++ b;
     }
