@@ -263,17 +263,18 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
         for (int i = 0; i < ctx.parameter().size(); i++) {
             parameters.add(visitParameter(ctx.parameter(i)));
         }
-        for (int i = 0; i < ctx.return_Rule().expression().getChild(0).getChildCount(); i++) {
-            if (ctx.return_Rule().expression().getChild(0).getChild(i).getText().equals(".") &&
-                    !ctx.TYPE().getText().equals("Float")) {
-                try {
-                    throw new Exception("illegal return type");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    MyWalker.setErrors(true);
+        if (ctx.return_Rule().expression() != null)
+            for (int i = 0; i < ctx.return_Rule().expression().getChild(0).getChildCount(); i++) {
+                if (ctx.return_Rule().expression().getChild(0).getChild(i).getText().equals(".") &&
+                        !ctx.TYPE().getText().equals("Float")) {
+                    try {
+                        throw new Exception("illegal return type");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        MyWalker.setErrors(true);
+                    }
                 }
             }
-        }
         statements.add(visit(ctx.return_Rule()));
         functionParamsMemory.put(ctx.NAME().getText(), parameters);
         Function function = new Function(parameters, ctx.NAME().getText(), ctx.TYPE().getText(), statements);
@@ -293,8 +294,9 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
 
     @Override
     public Base visitReturn_Rule(AntlrTestParser.Return_RuleContext ctx) {
-
-        return new ReturnStatement(visit(ctx.expression()));
+        if (ctx.expression() != null)
+            return new ReturnStatement(visit(ctx.expression()));
+        else return new ReturnStatement(visit(ctx.function_call()));
     }
 
     @Override

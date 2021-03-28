@@ -12,7 +12,7 @@
         right ++ b;
     }
 
-    wuf func(a);
+   b=  wuf func(a);
 }
 
 auf Integer func(Integer v){
@@ -25,5 +25,5 @@ Integer d = (2+4)
 
 auf Integer fuck(Integer v,Integer f){
 
-     return 2;
+     return wuf func(a);
     }

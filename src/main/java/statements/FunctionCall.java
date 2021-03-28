@@ -28,6 +28,6 @@ public class FunctionCall extends Statement {
             }
             params.deleteCharAt(params.length() - 1);
         }
-        return className.toLowerCase(Locale.ROOT) + "." + name + "(" + params + ");";
+        return className.toLowerCase(Locale.ROOT) + "." + name + "(" + params + ")";
     }
 }

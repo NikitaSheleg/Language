@@ -45,7 +45,8 @@ function:  'auf' TYPE NAME '(' parameter (',' parameter)* ')' '{' statement* ret
 mainFunction: MAIN_FUNCTION_ID'{' statement* '}';
 function_call: 'wuf' NAME '(' (parameter) (','parameter)* ')'';';
 
-return_Rule:  'return' expression ';' ;
+
+return_Rule:  'return' ((expression';')|function_call ) ;
 if_Rule: 'if' '(' expression')' '{'(statement';')*  '}' ('else' ('if' '(' expression')')? '{'statement '}')*;
 while_Rule:'while' '(' expression ')' '{'(statement';')* '}';
 for_Rule:'for' '(' parameter';'expression';'expression')' '{'statement*'}' ;

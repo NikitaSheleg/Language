@@ -15,9 +15,9 @@ public class UnaryOperator extends Expression {
     @Override
     public String toString() {
         if (side.equals("right"))
-            return var + operator + ";";
+            return var + operator ;
         else if (side.equals("left"))
-            return operator + var + ";";
+            return operator + var ;
         else return "wrong side";
     }
 }

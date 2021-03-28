@@ -17,6 +17,6 @@ public class NameAndValue extends Expression {
 
     @Override
     public String toString() {
-        return name + " = " + value +";";
+        return name + " = " + value ;
     }
 }

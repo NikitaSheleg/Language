@@ -26,7 +26,8 @@ public class Function extends Base {
         StringBuilder params = new StringBuilder();
         if (statements != null) {
             for (Base stat : statements) {
-                builder.append(stat.toString()).append(" ");
+                builder.append(stat.toString()).append(";");
+
             }
         }
         if (parameters != null) {

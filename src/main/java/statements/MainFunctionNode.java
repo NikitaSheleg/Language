@@ -16,7 +16,7 @@ public class MainFunctionNode extends Function {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         for (Base stat : statements) {
-            builder.append(stat.toString()).append(" ");
+            builder.append(stat.toString()).append(";");
         }
         return
                 "public static void main(String[] args)" +
