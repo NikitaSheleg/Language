@@ -1,4 +1,4 @@
-// Generated from C:/Users/User/Desktop/япис/FirstAntlr/src/main/java/antlr\AntlrTest.g4 by ANTLR 4.9.1
+// Generated from C:/Users/User/Desktop/пїЅпїЅпїЅпїЅ/FirstAntlr/src/main/java/antlr\AntlrTest.g4 by ANTLR 4.9.1
 package antlr;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 

@@ -8,7 +8,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class MyWalker extends BaseErrorListener {
-    private static boolean errors=false;
+    private static boolean errors = false;
+
     @Override
     public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol, int line, int charPositionInLine, String msg, RecognitionException e) {
         List<String> stack = ((Parser) recognizer).getRuleInvocationStack();
@@ -25,7 +26,11 @@ public class MyWalker extends BaseErrorListener {
         dialog.setLocationRelativeTo(null);
         dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         dialog.setVisible(true);
-        errors=true;
+        errors = true;
+    }
+
+    public static void setErrors(boolean error) {
+        errors = error;
     }
 
     public static boolean isErrors() {

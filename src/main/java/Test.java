@@ -5,8 +5,9 @@ public class Test {
         Integer a = 3;
         Integer b = 12;
         Float c = 9.23f;
-        while (a < c) {
-            a++;
+        while (a < b) {
+            --a;
+            break;
         }
         if (a < b) {
             a++;

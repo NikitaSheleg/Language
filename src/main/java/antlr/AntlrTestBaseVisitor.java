@@ -1,4 +1,4 @@
-// Generated from C:/Users/User/Desktop/япис/FirstAntlr/src/main/java/antlr\AntlrTest.g4 by ANTLR 4.9.1
+// Generated from C:/Users/User/Desktop/пїЅпїЅпїЅпїЅ/FirstAntlr/src/main/java/antlr\AntlrTest.g4 by ANTLR 4.9.1
 package antlr;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
@@ -31,7 +31,7 @@ public class AntlrTestBaseVisitor<T> extends AbstractParseTreeVisitor<T> impleme
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitDefineVariable(AntlrTestParser.DefineVariableContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDefineVariable(AntlrTestParser.DefineVariableContext ctx)  { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

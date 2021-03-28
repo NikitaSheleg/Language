@@ -26,6 +26,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
 
     @Override
     public Base visitDbl(AntlrTestParser.DblContext ctx) {
+
         return new Number(ctx.NUM(0).getText(), ctx.NUM(1).getText());
     }
 
@@ -91,24 +92,24 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
     }
 
     @Override
-    public Base visitDefineVariable(AntlrTestParser.DefineVariableContext ctx) {
-//TODO: bug with double
+    public Base visitDefineVariable(AntlrTestParser.DefineVariableContext ctx)  {
         String currentType = ctx.TYPE().getText();
         String name, value = null;
         if (ctx.identifier() != null) {
             name = ctx.identifier().NAME().getText();
-            if (ctx.identifier().dbl() == null) {
-                value = ctx.identifier().NUM().getText();
-            } else {
-                value = visit(ctx.expression()).toString();
-            }
-
-
+            value = ctx.identifier().NUM().getText();
         } else {
             name = ctx.NAME().getText();
         }
         if (ctx.expression() != null &&
                 ctx.expression().getChild(0) instanceof AntlrTestParser.DblContext) {
+            if(!currentType.equals("Float"))
+                try {
+                    throw new Exception("illegal var type");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    MyWalker.setErrors(true);
+                }
             value = visit(ctx.expression().getChild(0)).toString();
         }
 
