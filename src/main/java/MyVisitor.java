@@ -81,6 +81,13 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
     }
 
     @Override
+    public Base visitVarEqlsFunc(AntlrTestParser.VarEqlsFuncContext ctx) {
+        NameAndValue nameAndValue = new NameAndValue(ctx.NAME().getText(),
+                visit(ctx.function_call()).toString());
+        return nameAndValue;
+    }
+
+    @Override
     public NameAndValue visitIdentifier(AntlrTestParser.IdentifierContext ctx) {
 
         NameAndValue nameAndValue = new NameAndValue(ctx.NAME().getText(),

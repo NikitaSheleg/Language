@@ -30,26 +30,12 @@ public interface AntlrTestVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDefineVariable(AntlrTestParser.DefineVariableContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code idk}
-	 * labeled alternative in {@link AntlrTestParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIdk(AntlrTestParser.IdkContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code parens}
 	 * labeled alternative in {@link AntlrTestParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitParens(AntlrTestParser.ParensContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code not}
-	 * labeled alternative in {@link AntlrTestParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNot(AntlrTestParser.NotContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code plusMinus}
 	 * labeled alternative in {@link AntlrTestParser#expression}.
@@ -79,6 +65,34 @@ public interface AntlrTestVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitNum(AntlrTestParser.NumContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code mulDiv}
+	 * labeled alternative in {@link AntlrTestParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMulDiv(AntlrTestParser.MulDivContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code idk}
+	 * labeled alternative in {@link AntlrTestParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdk(AntlrTestParser.IdkContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code not}
+	 * labeled alternative in {@link AntlrTestParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNot(AntlrTestParser.NotContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code varEqlsFunc}
+	 * labeled alternative in {@link AntlrTestParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVarEqlsFunc(AntlrTestParser.VarEqlsFuncContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code name}
 	 * labeled alternative in {@link AntlrTestParser#expression}.
 	 * @param ctx the parse tree
@@ -99,13 +113,6 @@ public interface AntlrTestVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitLogic(AntlrTestParser.LogicContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code mulDiv}
-	 * labeled alternative in {@link AntlrTestParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMulDiv(AntlrTestParser.MulDivContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link AntlrTestParser#identifier}.
 	 * @param ctx the parse tree

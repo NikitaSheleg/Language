@@ -34,6 +34,8 @@ expression:
 | NAME #name
 | (NUM|dbl) #num
 |identifier #id
+|NAME '=' function_call#varEqlsFunc
+
 ;
 
 identifier:NAME '=' NUM|dbl;
