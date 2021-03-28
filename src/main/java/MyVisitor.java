@@ -6,14 +6,13 @@ import expressions.Math;
 import expressions.Number;
 import statements.*;
 
-import java.awt.print.Paper;
 import java.util.*;
 
 public class MyVisitor extends AntlrTestBaseVisitor<Base> {
 
 
     private static Map<String, String> memory = new HashMap<>();
-    private static Map<String, List<Parameter>> functionsMemory = new HashMap<>();
+    private static Map<String, List<Parameter>> functionParamsMemory = new HashMap<>();
     public static List<String> code = new ArrayList<>();
 
     @Override
@@ -100,6 +99,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
         } else {
             name = ctx.NAME().getText();
         }
+
         if (ctx.expression() != null &&
                 ctx.expression().getChild(0) instanceof AntlrTestParser.DblContext) {
             if (!currentType.equals("Float"))
@@ -268,7 +268,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
             }
         }
         statements.add(visit(ctx.return_Rule()));
-        functionsMemory.put(ctx.NAME().getText(), parameters);
+        functionParamsMemory.put(ctx.NAME().getText(), parameters);
         Function function = new Function(parameters, ctx.NAME().getText(), ctx.TYPE().getText(), statements);
         code.add(function.toString());
         return function;
@@ -292,14 +292,14 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
 
     @Override
     public Base visitFunction_call(AntlrTestParser.Function_callContext ctx) {
-        if (!functionsMemory.containsKey(ctx.NAME().getText())) {
+        if (!functionParamsMemory.containsKey(ctx.NAME().getText())) {
             try {
                 throw new Exception("illegal function call");
             } catch (Exception e) {
                 e.printStackTrace();
                 MyWalker.setErrors(true);
             }
-        } else if (functionsMemory.get(ctx.NAME().getText()).size() != ctx.parameter().size()) {
+        } else if (functionParamsMemory.get(ctx.NAME().getText()).size() != ctx.parameter().size()) {
             try {
                 throw new Exception("illegal number of function parameters");
             } catch (Exception e) {
@@ -314,4 +314,6 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
         }
         return new FunctionCall(parameters, ctx.NAME().getText(), "Test");
     }
+
+
 }
