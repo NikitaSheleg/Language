@@ -10,8 +10,9 @@ import java.util.*;
 
 public class MyVisitor extends AntlrTestBaseVisitor<Base> {
 
+    //TODO bind vars to functions
 
-    private static Map<String, String> memory = new HashMap<>();
+    private static Map<String, String> varsMemory = new HashMap<>();
     private static Map<String, List<Parameter>> functionParamsMemory = new HashMap<>();
     public static List<String> code = new ArrayList<>();
 
@@ -122,7 +123,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
         }
 
 
-        memory.put(name, currentType);
+        varsMemory.put(name, currentType);
         DefineVariable defineVariable = new DefineVariable(ctx.TYPE().getText(),
                 new NameAndValue(name, value));
 
@@ -211,7 +212,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
 
     @Override
     public Base visitUnaryOperator(AntlrTestParser.UnaryOperatorContext ctx) {
-        if (!memory.containsKey(ctx.NAME().getText()))
+        if (!varsMemory.containsKey(ctx.NAME().getText()))
             try {
                 throw new Exception("no such variable");
             } catch (Exception e) {
@@ -275,6 +276,8 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
                     }
                 }
             }
+        if (ctx.return_Rule().function_call()!=null)
+
         statements.add(visit(ctx.return_Rule()));
         functionParamsMemory.put(ctx.NAME().getText(), parameters);
         Function function = new Function(parameters, ctx.NAME().getText(), ctx.TYPE().getText(), statements);
