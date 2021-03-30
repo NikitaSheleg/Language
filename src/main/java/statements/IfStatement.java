@@ -18,6 +18,7 @@ public class IfStatement extends Statement {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         for (Base stat : statements) {
+
             builder.append(stat.toString()).append(";");
         }
         return "if(" + condition.toString() + ")\n{" + builder + "}";

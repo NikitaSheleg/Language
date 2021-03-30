@@ -43,16 +43,16 @@ identifier:NAME '=' NUM|dbl;
 WHITESPACE: [ \t\r\n]+ -> skip;
 function:  'auf' TYPE NAME '(' parameter (',' parameter)* ')' '{' statement* return_Rule'}';
 mainFunction: MAIN_FUNCTION_ID'{' statement* '}';
-function_call: 'wuf' NAME '(' (parameter) (','parameter)* ')'';';
+function_call: 'wuf' NAME '(' (parameter) (','parameter)* ')';
 
 
-return_Rule:  'return' ((expression';')|function_call ) ;
-if_Rule: 'if' '(' expression')' '{'(statement';')*  '}' ('else' ('if' '(' expression')')? '{'statement '}')*;
-while_Rule:'while' '(' expression ')' '{'(statement';')* '}';
+return_Rule:  'return' ((expression';')|function_call';' ) ;
+if_Rule: 'if' '(' expression')' '{'(statement)*  '}' ('else' ('if' '(' expression')')? '{'statement '}')*;
+while_Rule:'while' '(' expression ')' '{'(statement)* '}';
 for_Rule:'for' '(' parameter';'expression';'expression')' '{'statement*'}' ;
 break_Rule:'break';
 continue_Rule:'continue';
-statement_rules:(if_Rule|while_Rule|for_Rule|break_Rule|continue_Rule|expression+|function_call);
+statement_rules:(if_Rule|while_Rule|for_Rule|break_Rule|continue_Rule|(expression)+|function_call);
 
 statement:statement_rules+;
 

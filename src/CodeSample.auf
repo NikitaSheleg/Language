@@ -3,16 +3,26 @@
     Integer b= 12
     Float c = 9.23
     while(a<b){
-        left -- a;
-        break;
-    }
-    if(a<b){
-        right ++ a;
-        left -- b;
-        right ++ b;
+        left -- a
+         if(a<b){
+                         right ++ a
+                         left -- b
+                         right ++ b
+
+                         while(a>b){
+                         right -- a
+                         }
+
+                     }
+        break
     }
 
-   b=  wuf func(a);
+
+
+
+
+
+   b=  wuf func(a)
 }
 
 auf Integer func(Integer v){

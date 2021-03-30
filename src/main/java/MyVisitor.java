@@ -11,9 +11,9 @@ import java.util.*;
 public class MyVisitor extends AntlrTestBaseVisitor<Base> {
 
     //TODO bind vars to functions
-
-    private static Map<String, String> varsMemory = new HashMap<>();
-    private static Map<String, List<Parameter>> functionParamsMemory = new HashMap<>();
+    private static final Map<String, Map<String, String>> varTable = new HashMap<>();
+    private static final Map<String, String> varsMemory = new HashMap<>();
+    private static final Map<String, List<Parameter>> functionParamsMemory = new HashMap<>();
     public static List<String> code = new ArrayList<>();
 
     @Override
@@ -33,7 +33,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
     public Base visitMulDiv(AntlrTestParser.MulDivContext ctx) {
 
         Math math;
-        if (ctx.operation.getType() == AntlrTestParser.PLUS) {
+        if (ctx.operation.getType() == AntlrTestParser.MULTIPLICATION) {
             math = new Math(
                     "mult",
                     (Expression) visit(ctx.expression(0)),
@@ -158,11 +158,16 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
         return ifStatement;
     }
 
+
+
     @Override
     public Base visitWhile_Rule(AntlrTestParser.While_RuleContext ctx) {
         List<Base> statements = new ArrayList<>();
         for (int i = 0; i < ctx.statement().size(); i++) {
-            statements.add(visit(ctx.statement(i)));
+            for (int j = 0; j < ctx.statement(i).statement_rules().size(); j++) {
+                statements.add(visitStatement_rules(ctx.statement(i).statement_rules(j)));
+
+            }
 
         }
         While state = new While(
@@ -233,8 +238,10 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
                 for (int k = 0; k < ctx.statement(i).statement_rules(j).expression().size() - 1; k++) {
                     statements.add(visit(ctx.statement(i).statement_rules(j).expression(k)));
                 }
-                statements.add(visit(ctx.statement(i).statement_rules(j)));
-            }
+                Base statement =visit(ctx.statement(i).statement_rules(j));
+                if (statement != null) {
+                    statements.add(statement);
+                }            }
             // statements.add(visit(ctx.statement(i)));
         }
 
@@ -255,31 +262,28 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
         List<Parameter> parameters = new ArrayList<>();
         for (int i = 0; i < ctx.statement().size(); i++) {
             for (int j = 0; j < ctx.statement(i).statement_rules().size(); j++) {
-                for (int k = 0; k < ctx.statement(i).statement_rules(j).expression().size() - 1; k++) {
+                for (int k = 0; k < ctx.statement(i).statement_rules(j).expression().size()-1 ; k++) {
                     statements.add(visit(ctx.statement(i).statement_rules(j).expression(k)));
                 }
-                statements.add(visit(ctx.statement(i).statement_rules(j)));
+                Base statement =visit(ctx.statement(i).statement_rules(j));
+                if (statement != null) {
+                    statements.add(statement);
+                }
             }
         }
         for (int i = 0; i < ctx.parameter().size(); i++) {
             parameters.add(visitParameter(ctx.parameter(i)));
         }
-        if (ctx.return_Rule().expression() != null)
-            for (int i = 0; i < ctx.return_Rule().expression().getChild(0).getChildCount(); i++) {
-                if (ctx.return_Rule().expression().getChild(0).getChild(i).getText().equals(".") &&
-                        !ctx.TYPE().getText().equals("Float")) {
-                    try {
-                        throw new Exception("illegal return type");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        MyWalker.setErrors(true);
-                    }
-                }
-            }
-        if (ctx.return_Rule().function_call()!=null)
 
         statements.add(visit(ctx.return_Rule()));
         functionParamsMemory.put(ctx.NAME().getText(), parameters);
+
+        //TODO idk about this
+        Map<String, String> funcVars = new HashMap<>(varsMemory);
+        varTable.put(ctx.NAME().getText(), funcVars);
+        varsMemory.clear();
+
+
         Function function = new Function(parameters, ctx.NAME().getText(), ctx.TYPE().getText(), statements);
         code.add(function.toString());
         return function;
@@ -287,9 +291,10 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
 
     @Override
     public Parameter visitParameter(AntlrTestParser.ParameterContext ctx) {
-        if (ctx.TYPE() != null)
+        if (ctx.TYPE() != null) {
+            varsMemory.put(ctx.NAME().getText(),ctx.TYPE().getText());
             return new Parameter(ctx.TYPE().getText(), ctx.NAME().getText());
-        else if (ctx.NAME() != null)
+        } else if (ctx.NAME() != null)
             return new Parameter(ctx.NAME().getText());
         else
             return new Parameter(ctx.NUM().getText());
