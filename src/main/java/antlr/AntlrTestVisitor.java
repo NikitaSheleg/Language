@@ -72,6 +72,13 @@ public interface AntlrTestVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMulDiv(AntlrTestParser.MulDivContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code typeConverter}
+	 * labeled alternative in {@link AntlrTestParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTypeConverter(AntlrTestParser.TypeConverterContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code idk}
 	 * labeled alternative in {@link AntlrTestParser#expression}.
 	 * @param ctx the parse tree

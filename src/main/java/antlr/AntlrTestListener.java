@@ -112,6 +112,18 @@ public interface AntlrTestListener extends ParseTreeListener {
 	 */
 	void exitMulDiv(AntlrTestParser.MulDivContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code typeConverter}
+	 * labeled alternative in {@link AntlrTestParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypeConverter(AntlrTestParser.TypeConverterContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code typeConverter}
+	 * labeled alternative in {@link AntlrTestParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypeConverter(AntlrTestParser.TypeConverterContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code idk}
 	 * labeled alternative in {@link AntlrTestParser#expression}.
 	 * @param ctx the parse tree

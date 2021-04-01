@@ -2,6 +2,8 @@
     Integer a=3
     Integer b= 12
     Float c = 9.23
+    (Integer) b
+    (Float) 4
     while(a<b){
         left -- a
          if(a<b){

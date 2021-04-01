@@ -75,27 +75,24 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
 
     @Override
     public NameAndValue visitId(AntlrTestParser.IdContext ctx) {
-        NameAndValue nameAndValue = new NameAndValue(ctx.identifier().NAME().getText(),
+        return new NameAndValue(ctx.identifier().NAME().getText(),
                 ctx.identifier().NUM().getText()
         );
-        return nameAndValue;
     }
 
     @Override
     public Base visitVarEqlsFunc(AntlrTestParser.VarEqlsFuncContext ctx) {
         checkForLegalVar(ctx.NAME().getText());
-        NameAndValue nameAndValue = new NameAndValue(ctx.NAME().getText(),
+        return new NameAndValue(ctx.NAME().getText(),
                 visit(ctx.function_call()).toString());
-        return nameAndValue;
     }
 
     @Override
     public NameAndValue visitIdentifier(AntlrTestParser.IdentifierContext ctx) {
 
-        NameAndValue nameAndValue = new NameAndValue(ctx.NAME().getText(),
+        return new NameAndValue(ctx.NAME().getText(),
                 ctx.NUM().getText()
         );
-        return nameAndValue;
     }
 
     @Override
@@ -155,13 +152,12 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
             statements.add(visit(ctx.statement(i)));
 
         }
-        IfStatement ifStatement = new IfStatement(
+        // code.add(ifStatement.toString());
+        return new IfStatement(
                 new Condition(ctx.expression(0).getChild(0).getText(),
                         ctx.expression(0).getChild(2).getText(),
                         ctx.expression(0).getChild(1).getText()), statements
         );
-        // code.add(ifStatement.toString());
-        return ifStatement;
     }
 
 
@@ -177,14 +173,13 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
             }
 
         }
-        While state = new While(
+        //  code.add(state.toString());
+        return new While(
                 new Condition(ctx.expression().getChild(0).getText(),
                         ctx.expression().getChild(2).getText(),
                         ctx.expression().getChild(1).getText()), statements
 
         );
-        //  code.add(state.toString());
-        return state;
     }
 
 
@@ -218,7 +213,7 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
 
     @Override
     public Base visitName(AntlrTestParser.NameContext ctx) {
-
+        checkForLegalVar(ctx.NAME().getText());
         return new Expression(ctx.NAME().getText());
     }
 
@@ -368,5 +363,19 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
         return new FunctionCall(parameters, ctx.NAME().getText(), "Test");
     }
 
+    @Override
+    public Base visitTypeConverter(AntlrTestParser.TypeConverterContext ctx) {
+        TypeConvertion typeConvertion;
+        if (ctx.NUM() != null)
+            typeConvertion = new TypeConvertion(ctx.TYPE().getText(), ctx.NUM().getText());
+        else if (ctx.NAME() != null) {
+            if (varsMemory.containsKey(ctx.NAME().getText()))
+                typeConvertion = new TypeConvertion(ctx.TYPE().getText(), ctx.NAME().getText());
+            else throw new ClassCastException("illegal var used");
+        } else
+            typeConvertion = new TypeConvertion(ctx.TYPE().getText(), visit(ctx.dbl()).toString());
 
+
+        return typeConvertion;
+    }
 }

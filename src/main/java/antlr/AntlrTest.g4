@@ -34,6 +34,7 @@ expression:
 | '!' expression #not
 | NAME #name
 | (NUM|dbl) #num
+| '('TYPE')' (NUM|dbl|NAME)#typeConverter
 |identifier #id
 |NAME '=' function_call#varEqlsFunc
 

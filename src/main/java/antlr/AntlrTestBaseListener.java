@@ -124,6 +124,18 @@ public class AntlrTestBaseListener implements AntlrTestListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterTypeConverter(AntlrTestParser.TypeConverterContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTypeConverter(AntlrTestParser.TypeConverterContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterIdk(AntlrTestParser.IdkContext ctx) { }
 	/**
 	 * {@inheritDoc}

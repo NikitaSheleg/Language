@@ -80,6 +80,13 @@ public class AntlrTestBaseVisitor<T> extends AbstractParseTreeVisitor<T> impleme
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitTypeConverter(AntlrTestParser.TypeConverterContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitIdk(AntlrTestParser.IdkContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
