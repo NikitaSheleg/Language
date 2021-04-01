@@ -26,15 +26,18 @@ public class Function extends Base {
         StringBuilder params = new StringBuilder();
         if (statements != null) {
             for (Base stat : statements) {
-                builder.append(stat.toString()).append(";");
+                builder.append(stat.toString());
+                if (!stat.toString().endsWith("}"))
+                    builder.append(";");
 
             }
         }
         if (parameters != null) {
             for (Base parameter : parameters) {
+
                 params.append(parameter.toString()).append(",");
             }
-            params.deleteCharAt(params.length()-1);
+            params.deleteCharAt(params.length() - 1);
         }
         return type +
                 " " +

@@ -3,27 +3,39 @@
     Integer b= 12
     Float c = 9.23
     while(a<b){
-        left -- a;
-        break;
-    }
-    if(a<b){
-        right ++ a;
-        left -- b;
-        right ++ b;
+        left -- a
+         if(a<b){
+                         right ++ a
+                         left -- b
+                         right ++ b
+
+                         while(a>b){
+                            a=  wuf func(b)
+                         }
+
+                     }
+        break
     }
 
-   b=  wuf func(a);
+
+
+
+
+
+   b=  wuf func(a)
 }
 
 auf Integer func(Integer v){
 
 Integer d = (2+4)
 
-
+while(d<v){
+left -- d
+}
      return (1+2);
     }
 
 auf Integer fuck(Integer v,Integer f){
 
-     return wuf func(a);
+     return wuf func(v);
     }
