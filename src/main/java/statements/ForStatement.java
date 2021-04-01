@@ -24,7 +24,10 @@ public class ForStatement extends Statement {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         for (Base stat : statements) {
-            builder.append(stat.toString()).append(";");
+            builder.append(stat.toString());
+            if (!stat.toString().endsWith("}"))
+                builder.append(";");
+
         }
         return "for(" +
                 parameter.toString() + ";" +

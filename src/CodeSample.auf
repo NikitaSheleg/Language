@@ -10,7 +10,7 @@
                          right ++ b
 
                          while(a>b){
-                         right -- a
+                            a=  wuf func(b)
                          }
 
                      }
@@ -29,11 +29,13 @@ auf Integer func(Integer v){
 
 Integer d = (2+4)
 
-
+while(d<v){
+left -- d
+}
      return (1+2);
     }
 
 auf Integer fuck(Integer v,Integer f){
 
-     return wuf func(a);
+     return wuf func(v);
     }

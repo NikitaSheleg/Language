@@ -20,8 +20,10 @@ public class While extends Statement {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         for (Base stat : statements) {
+            builder.append(stat.toString());
+            if (!stat.toString().endsWith("}"))
+                builder.append(";");
 
-            builder.append(stat.toString()).append(";");
         }
 
         return "while(" +

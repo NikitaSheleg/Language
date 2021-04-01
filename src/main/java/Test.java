@@ -3,11 +3,14 @@ public class Test {
 
     Integer func(Integer v) {
         Integer d = (2 + 4);
+        while (d < v) {
+            --d;
+        }
         return (1 + 2);
     }
 
     Integer fuck(Integer v, Integer f) {
-        return test.func(a);
+        return test.func(v);
     }
 
     public static void main(String[] args) {
@@ -18,14 +21,11 @@ public class Test {
             --a;
             if (a < b) {
                 while (a > b) {
-                    a--;
+                    a = test.func(b);
                 }
-                ;
             }
-            ;
             break;
         }
-        ;
         b = test.func(a);
     }
 }
