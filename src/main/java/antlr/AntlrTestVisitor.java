@@ -151,6 +151,12 @@ public interface AntlrTestVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitReturn_Rule(AntlrTestParser.Return_RuleContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link AntlrTestParser#else_rule}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElse_rule(AntlrTestParser.Else_ruleContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link AntlrTestParser#if_Rule}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

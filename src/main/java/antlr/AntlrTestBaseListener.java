@@ -268,6 +268,18 @@ public class AntlrTestBaseListener implements AntlrTestListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterElse_rule(AntlrTestParser.Else_ruleContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitElse_rule(AntlrTestParser.Else_ruleContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterIf_Rule(AntlrTestParser.If_RuleContext ctx) { }
 	/**
 	 * {@inheritDoc}

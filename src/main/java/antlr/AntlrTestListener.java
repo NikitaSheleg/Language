@@ -246,6 +246,16 @@ public interface AntlrTestListener extends ParseTreeListener {
 	 */
 	void exitReturn_Rule(AntlrTestParser.Return_RuleContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link AntlrTestParser#else_rule}.
+	 * @param ctx the parse tree
+	 */
+	void enterElse_rule(AntlrTestParser.Else_ruleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AntlrTestParser#else_rule}.
+	 * @param ctx the parse tree
+	 */
+	void exitElse_rule(AntlrTestParser.Else_ruleContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link AntlrTestParser#if_Rule}.
 	 * @param ctx the parse tree
 	 */

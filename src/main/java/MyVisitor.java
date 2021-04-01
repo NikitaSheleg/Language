@@ -145,21 +145,41 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
     @Override
     public Base visitIf_Rule(AntlrTestParser.If_RuleContext ctx) {
         List<Base> statements = new ArrayList<>();
-        checkForLegalVar(ctx.expression(0).getChild(0).getText());
-        checkForLegalVar(ctx.expression(0).getChild(2).getText());
+        checkForLegalVar(ctx.expression().getChild(0).getText());
+        checkForLegalVar(ctx.expression().getChild(2).getText());
 
         for (int i = 0; i < ctx.statement().size(); i++) {
             statements.add(visit(ctx.statement(i)));
 
         }
+        if (ctx.else_rule() != null) {
+            List<ElseStatement> elseStatements = new ArrayList<>();
+            for (int i = 0; i < ctx.else_rule().size(); i++) {
+                elseStatements.add(visitElse_rule(ctx.else_rule(i)));
+            }
+            return new IfStatement(
+                    new Condition(ctx.expression().getChild(0).getText(),
+                            ctx.expression().getChild(2).getText(),
+                            ctx.expression().getChild(1).getText()), statements, elseStatements
+            );
+        }
         // code.add(ifStatement.toString());
         return new IfStatement(
-                new Condition(ctx.expression(0).getChild(0).getText(),
-                        ctx.expression(0).getChild(2).getText(),
-                        ctx.expression(0).getChild(1).getText()), statements
+                new Condition(ctx.expression().getChild(0).getText(),
+                        ctx.expression().getChild(2).getText(),
+                        ctx.expression().getChild(1).getText()), statements
         );
     }
 
+    @Override
+    public ElseStatement visitElse_rule(AntlrTestParser.Else_ruleContext ctx) {
+        List<Base> statements = new ArrayList<>();
+        for (int i = 0; i < ctx.statement().size(); i++) {
+            statements.add(visit(ctx.statement(i)));
+
+        }
+        return new ElseStatement(statements);
+    }
 
     @Override
     public Base visitWhile_Rule(AntlrTestParser.While_RuleContext ctx) {
@@ -378,4 +398,5 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
 
         return typeConvertion;
     }
+
 }
