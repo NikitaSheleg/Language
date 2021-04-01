@@ -50,7 +50,7 @@ function_call: 'wuf' NAME '(' (parameter) (','parameter)* ')';
 
 return_Rule:  'return' ((expression';')|function_call';' ) ;
 else_rule:('else'  '{'statement+ '}');
-if_Rule: 'if' '(' expression')' '{'(statement)*  '}' else_rule*;
+if_Rule: 'if' '(' expression')' '{'(statement)*  '}' else_rule?;
 while_Rule:'while' '(' expression ')' '{'(statement)* '}';
 for_Rule:'for' '(' parameter';'expression';'expression')' '{'statement*'}' ;
 break_Rule:'break';

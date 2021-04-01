@@ -153,14 +153,11 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
 
         }
         if (ctx.else_rule() != null) {
-            List<ElseStatement> elseStatements = new ArrayList<>();
-            for (int i = 0; i < ctx.else_rule().size(); i++) {
-                elseStatements.add(visitElse_rule(ctx.else_rule(i)));
-            }
+
             return new IfStatement(
                     new Condition(ctx.expression().getChild(0).getText(),
                             ctx.expression().getChild(2).getText(),
-                            ctx.expression().getChild(1).getText()), statements, elseStatements
+                            ctx.expression().getChild(1).getText()), statements, visitElse_rule(ctx.else_rule())
             );
         }
         // code.add(ifStatement.toString());
