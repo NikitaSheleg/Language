@@ -19,7 +19,7 @@ NAME : [a-z]+|[A-Z]+;
 TYPE: 'Integer'|'Float';
 dbl : NUM+ PT NUM+;
 
-parameter: (TYPE NAME|NUM|NAME)?;
+parameter: ((TYPE NAME)|NUM|NAME)?;
 
 
 expression:
@@ -52,7 +52,7 @@ return_Rule:  'return' ((expression';')|function_call';' ) ;
 else_rule:('else'  '{'statement+ '}');
 if_Rule: 'if' '(' expression')' '{'(statement)*  '}' else_rule?;
 while_Rule:'while' '(' expression ')' '{'(statement)* '}';
-for_Rule:'for' '(' parameter';'expression';'expression')' '{'statement*'}' ;
+for_Rule:'for' '(' expression';'expression';'expression')' '{'statement*'}' ;
 break_Rule:'break';
 continue_Rule:'continue';
 statement_rules:(if_Rule|while_Rule|for_Rule|break_Rule|continue_Rule|(expression)+|function_call);

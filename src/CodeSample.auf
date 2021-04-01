@@ -18,6 +18,9 @@
          }else { right ++ b }
         break
     }
+    for(Integer i = 0; i<p; right ++ i){
+        left -- b
+    }
 
 
 

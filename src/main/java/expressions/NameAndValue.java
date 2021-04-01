@@ -11,6 +11,10 @@ public class NameAndValue extends Expression {
 
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String getValue() {
         return value;
     }

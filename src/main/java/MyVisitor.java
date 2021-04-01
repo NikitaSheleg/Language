@@ -199,6 +199,24 @@ public class MyVisitor extends AntlrTestBaseVisitor<Base> {
         );
     }
 
+    @Override
+    public Base visitFor_Rule(AntlrTestParser.For_RuleContext ctx) {
+        List<Base> statements = new ArrayList<>();
+        DefineVariable variable = (DefineVariable) visit(ctx.expression(0));
+        varTable.get("main").put(variable.getNameAndValue().getName(), variable.getType());
+        Condition condition = visitCompare((AntlrTestParser.CompareContext) ctx.expression(1));
+        Expression expression = (Expression) visit(ctx.expression(2));
+
+        for (int i = 0; i < ctx.statement().size(); i++) {
+            for (int j = 0; j < ctx.statement(i).statement_rules().size(); j++) {
+                statements.add(visitStatement_rules(ctx.statement(i).statement_rules(j)));
+
+            }
+
+        }
+        varTable.get("main").remove(variable.getNameAndValue().getName());
+        return new ForStatement(variable, statements, condition, expression);
+    }
 
     @Override
     public Base visitCool(AntlrTestParser.CoolContext ctx) {

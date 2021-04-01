@@ -11,9 +11,13 @@ public class DefineVariable extends Expression {
         this.nameAndValue=nameAndValue;
     }
 
+    public String getType() {
+        return type;
+    }
 
-
-
+    public NameAndValue getNameAndValue() {
+        return nameAndValue;
+    }
 
     @Override
     public String toString() {

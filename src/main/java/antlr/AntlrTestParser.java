@@ -189,9 +189,9 @@ public class AntlrTestParser extends Parser {
 	}
 
 	public static class ParameterContext extends ParserRuleContext {
-		public TerminalNode TYPE() { return getToken(AntlrTestParser.TYPE, 0); }
-		public TerminalNode NAME() { return getToken(AntlrTestParser.NAME, 0); }
 		public TerminalNode NUM() { return getToken(AntlrTestParser.NUM, 0); }
+		public TerminalNode NAME() { return getToken(AntlrTestParser.NAME, 0); }
+		public TerminalNode TYPE() { return getToken(AntlrTestParser.TYPE, 0); }
 		public ParameterContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -222,10 +222,12 @@ public class AntlrTestParser extends Parser {
 			switch (_input.LA(1)) {
 			case TYPE:
 				{
+				{
 				setState(45);
 				match(TYPE);
 				setState(46);
 				match(NAME);
+				}
 				}
 				break;
 			case NUM:
@@ -242,7 +244,6 @@ public class AntlrTestParser extends Parser {
 				break;
 			case T__2:
 			case T__6:
-			case T__11:
 				break;
 			default:
 				break;
@@ -1479,9 +1480,6 @@ public class AntlrTestParser extends Parser {
 	}
 
 	public static class For_RuleContext extends ParserRuleContext {
-		public ParameterContext parameter() {
-			return getRuleContext(ParameterContext.class,0);
-		}
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
@@ -1525,7 +1523,7 @@ public class AntlrTestParser extends Parser {
 			setState(206);
 			match(T__1);
 			setState(207);
-			parameter();
+			expression(0);
 			setState(208);
 			match(T__11);
 			setState(209);
@@ -2039,7 +2037,7 @@ public class AntlrTestParser extends Parser {
 		"\5\2\2\u00c6\u00ca\7\n\2\2\u00c7\u00c9\5 \21\2\u00c8\u00c7\3\2\2\2\u00c9"+
 		"\u00cc\3\2\2\2\u00ca\u00c8\3\2\2\2\u00ca\u00cb\3\2\2\2\u00cb\u00cd\3\2"+
 		"\2\2\u00cc\u00ca\3\2\2\2\u00cd\u00ce\7\13\2\2\u00ce\27\3\2\2\2\u00cf\u00d0"+
-		"\7\22\2\2\u00d0\u00d1\7\4\2\2\u00d1\u00d2\5\4\3\2\u00d2\u00d3\7\16\2\2"+
+		"\7\22\2\2\u00d0\u00d1\7\4\2\2\u00d1\u00d2\5\6\4\2\u00d2\u00d3\7\16\2\2"+
 		"\u00d3\u00d4\5\6\4\2\u00d4\u00d5\7\16\2\2\u00d5\u00d6\5\6\4\2\u00d6\u00d7"+
 		"\7\5\2\2\u00d7\u00db\7\n\2\2\u00d8\u00da\5 \21\2\u00d9\u00d8\3\2\2\2\u00da"+
 		"\u00dd\3\2\2\2\u00db\u00d9\3\2\2\2\u00db\u00dc\3\2\2\2\u00dc\u00de\3\2"+
